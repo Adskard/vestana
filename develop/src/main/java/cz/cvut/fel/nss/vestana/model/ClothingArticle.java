@@ -22,7 +22,7 @@ public class ClothingArticle extends AbstractEntity {
     @Column(nullable = false)
     private int size;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private ArticleAvailability availability;
 
 }
