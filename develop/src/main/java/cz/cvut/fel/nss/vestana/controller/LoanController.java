@@ -1,6 +1,7 @@
 package cz.cvut.fel.nss.vestana.controller;
 
 import cz.cvut.fel.nss.vestana.controller.util.RestUtils;
+import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import cz.cvut.fel.nss.vestana.model.Loan;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,11 @@ public class LoanController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> finishLoan(@RequestBody() Loan loan) {
         final Loan newLoan = loan;
+        boolean checkLoanAttributes = true;
         // loanService.loanCheck(loan) - so that CUSTOMER, STARTDATE and ENDDATE are filled and/or make sense
+        if (!checkLoanAttributes) {
+            throw new InvalidStateException("Attributes of the loan are missing or don't make sense.");
+        }
 
         // for every item in the loan mark the dates for ArticleAvailability as BOOKED
         // need loanService
