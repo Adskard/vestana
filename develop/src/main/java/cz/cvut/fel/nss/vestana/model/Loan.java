@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "LOAN")
@@ -25,4 +26,10 @@ public class Loan extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
     private DeliveryType deliveryType;
+
+    @OneToOne
+    private Customer customer;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    private List<ClothingArticle> loanedItems;
 }
