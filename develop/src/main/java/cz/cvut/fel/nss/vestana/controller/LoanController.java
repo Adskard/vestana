@@ -30,6 +30,8 @@ public class LoanController {
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> finishLoan(@RequestBody() Loan loan) {
         final Loan newLoan = loan;
+        // loanService.loanCheck(loan) - so that CUSTOMER, STARTDATE and ENDDATE are filled and/or make sense
+
         // for every item in the loan mark the dates for ArticleAvailability as BOOKED
         // need loanService
         boolean availabilityCheck = true;
