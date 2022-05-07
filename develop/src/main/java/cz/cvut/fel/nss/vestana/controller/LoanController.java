@@ -1,6 +1,7 @@
 package cz.cvut.fel.nss.vestana.controller;
 
 import cz.cvut.fel.nss.vestana.controller.util.RestUtils;
+import cz.cvut.fel.nss.vestana.dto.LoanDto;
 import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import cz.cvut.fel.nss.vestana.model.Loan;
@@ -10,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/loans")
@@ -83,6 +86,14 @@ public class LoanController {
     public void removeItem(@RequestBody ClothingArticle item) {
         final Loan loan = getCurrentLoan();
         //loanService.removeItem(loan, item);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<LoanDto> getLoan(@PathVariable Long id) {
+       // Loan loan = Optional.ofNullable(loanService.findLoan(id))
+       //         .orElseThrow(() -> new NotFoundException("Loan id " + id + " not found"));
+       // return ResponseEntity.ok(loan.toDto());
+        return null;
     }
 
 }
