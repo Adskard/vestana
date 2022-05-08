@@ -27,6 +27,7 @@ Boot application and website presentation.
 | 04  | sign in / register  | most likely Basic authorization             |        |        |
 | 05  | controllers         | 2-3                                         |        |   AS   |
 | 06  | git tasks/use case  | create system for correct commit naming     |  Done  |   AS   |
+| 07  | loan service        |                                             |        |   MK   |
 
 
 ## Requirements
