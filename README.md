@@ -35,6 +35,6 @@ Boot application and website presentation.
 
 | Functionality | Where                   |  Completed (%)  | Details   |
 |---------------|-------------------------|:---------------:|-----------|
-| Example       | `resercationController` |      100%       | blablabla |
+| Example       | `reservationController` |      100%       | blablabla |
 
 
