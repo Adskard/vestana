@@ -3,6 +3,7 @@ package cz.cvut.fel.nss.vestana.model;
 import cz.cvut.fel.nss.vestana.model.enums.ArticleState;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.Entity;
 import java.time.LocalDate;
@@ -12,15 +13,9 @@ import java.time.LocalDate;
 @Data
 public class DayOfCalendar extends AbstractEntity {
 
+    @Getter
     private LocalDate localDate;
 
+    @Getter
     private ArticleState articleState;
-
-    public LocalDate getLocalDate() {
-        return localDate;
-    }
-
-    public ArticleState getArticleState() {
-        return articleState;
-    }
 }
