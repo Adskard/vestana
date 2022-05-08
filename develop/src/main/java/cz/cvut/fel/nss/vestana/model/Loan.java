@@ -7,10 +7,13 @@ import cz.cvut.fel.nss.vestana.dto.LoanDto;
 import cz.cvut.fel.nss.vestana.model.enums.DeliveryType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
@@ -22,11 +25,13 @@ public class Loan extends AbstractEntity {
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @Getter
     private LocalDate start;
 
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
+    @Getter
     private LocalDate end;
 
     @Enumerated(EnumType.STRING)
@@ -36,6 +41,7 @@ public class Loan extends AbstractEntity {
     private Customer customerToLoan;
 
     @ManyToMany(cascade = CascadeType.MERGE)
+    @Getter
     private List<ClothingArticle> loanedItems;
 
     public LoanDto toDto() {
@@ -61,4 +67,19 @@ public class Loan extends AbstractEntity {
         return result;
     }
 
+    public void removeItem(ClothingArticle item) {
+        Objects.requireNonNull(item);
+        if (loanedItems == null) {
+            return;
+        }
+        loanedItems.removeIf(i -> Objects.equals(i.getId(), item.getId()));
+    }
+
+    public void addItem(ClothingArticle item) {
+        Objects.requireNonNull(item);
+        if (loanedItems == null) {
+            this.loanedItems = new ArrayList<>();
+        }
+        loanedItems.add(item);
+    }
 }
