@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,10 +18,10 @@ public class CalendarMap extends AbstractEntity {
     @OneToMany(cascade = CascadeType.ALL)
     List<DayOfCalendar> calendarDays;
 
-    public ArticleState getStatus(LocalDate date) {
+    public ArticleState getStatus(Date date) {
         ArticleState state = ArticleState.AVAILABLE;
         for (DayOfCalendar day : calendarDays) {
-            if (day.getLocalDate() == date) {
+            if (day.getDate() == date) {
                 state = day.getArticleState();
             }
         }

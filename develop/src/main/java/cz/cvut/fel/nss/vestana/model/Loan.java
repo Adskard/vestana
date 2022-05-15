@@ -12,6 +12,7 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -26,13 +27,13 @@ public class Loan extends AbstractEntity {
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @Getter
-    private LocalDate start;
+    private Date start;
 
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
     @Getter
-    private LocalDate end;
+    private Date end;
 
     @Enumerated(EnumType.STRING)
     private DeliveryType deliveryType;

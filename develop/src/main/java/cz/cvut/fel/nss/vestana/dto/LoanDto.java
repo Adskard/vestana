@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -17,9 +18,9 @@ public class LoanDto {
     private Long id;
     private boolean deleted;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate start;
+    private Date start;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate end;
+    private Date end;
     private DeliveryType deliveryType;
     private CustomerDto customer;
     private List<ItemDto> loanedItems;

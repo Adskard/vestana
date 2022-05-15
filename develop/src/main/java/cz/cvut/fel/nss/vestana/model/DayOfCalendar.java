@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.persistence.Entity;
-import java.time.LocalDate;
+import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class DayOfCalendar extends AbstractEntity {
 
     @Getter
-    private LocalDate localDate;
+    private Date date;
 
     @Getter
     private ArticleState articleState;
