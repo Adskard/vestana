@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 
 @Entity
 @Table(name = "AVAILABILITY")
@@ -17,23 +18,30 @@ public class ArticleAvailability extends AbstractEntity {
     private CalendarMap calendarMap;
 
 
-    public ArticleState getStatus(LocalDate date) {
+    public ArticleState getStatus(Date date) {
         return calendarMap.getStatus(date);
     }
 
-    public boolean checkAvailabilityPeriod (LocalDate start, LocalDate end) {
+    public boolean checkAvailabilityPeriod (Date start, Date end) {
 
         boolean available = true;
-        LocalDate date = start;
+        Date date = start;
 
-        while (date != end.plusDays(1)) {
+        while (date != addOneDay(end)) {
             if (getStatus(date) != ArticleState.AVAILABLE) {
                 available = false;
                 continue;
             }
-            date = date.plusDays(1);
+            date = addOneDay(date);
         }
 
         return available;
+    }
+
+    private Date addOneDay(Date curr) {
+        Calendar c = Calendar.getInstance();
+        c.setTime(curr);
+        c.add(Calendar.DATE, 1);
+        return c.getTime();
     }
 }
