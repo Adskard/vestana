@@ -23,6 +23,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
         super();
         this.setAuthenticationManager(authenticationManager);
+
     }
 
     @Override
@@ -31,6 +32,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain chain,
                                             Authentication auth
     ) throws IOException {
+        System.out.println("successfulAuthentication method initiated");
         AppUserDetails principal = (AppUserDetails) auth.getPrincipal();
         GrantedAuthority authority = null;
         try {

@@ -34,8 +34,33 @@ Boot application and website presentation.
 ## Requirements
 <!-- must be displayed per instructions -->
 
-| Functionality | Where                   |  Completed (%)  | Details   |
-|---------------|-------------------------|:---------------:|-----------|
-| Example       | `reservationController` |      100%       | blablabla |
+### Mandatory requirements
+| Functionality                    | Where       | Completed (%) | Details                                                    |
+|----------------------------------|-------------|:-------------:|------------------------------------------------------------|
+| Technology/Language selection    | -           |     100%      | Java/SpringBoot                                            |
+| Readme.md documentation          | `Readme.md` |      40%      |                                                            |
+| Use of DB                        |             |               | relational/graph                                           |
+| Deployment on the server         |             |               | e.i. Heroku                                                |
+| SW architecture design selection |             |               | event base, pipe and filter,...                            |
+| Initialization instructions      |             |               | how to deploy, where to find basic data, such as admin psw |
+| Use 5 design patterns            |             |               | Must make sense.                                           |
+| Two UC per team member           |             |               | non-trivial, 3 members => 6 UC                             |
 
+
+
+### Non-mandatory requirements (-2 points if not present)
+| Functionality            | Where     | Completed (%) | Details                                        |
+|--------------------------|-----------|:-------------:|------------------------------------------------|
+| Cache                    | `example` |      0%       | Hazelcast                                      |
+| Messaging principle      |           |      0%       | Kafka or JVM                                   |
+| Security                 |           |      0%       | Basic or OAuth2                                |
+| Interceptor              |           |      0%       | e.i. logging                                   |
+| Use one given technology |           |      0%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
+| ElasticSearch            |           |      0%       |                                                |
+|                          |           |               |                                                |
+
+### Bonus requirements (+2 points if not present)
+| Functionality | Where | Completed (%) | Details    |
+|---------------|-------|:-------------:|------------|
+| Cloud service |       |      0%       | azure, aws |
 

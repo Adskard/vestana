@@ -30,7 +30,7 @@ public class SampleDataLoader implements ApplicationRunner {
         user.setUsername(name);
         user.setPassword(passwordEncoder.encode("password"));
         employeeService.addUser(user);
-        System.out.println(employeeService.findById(Long.valueOf(1)).get().getUsername());
+        System.out.println(employeeService.findById(1L).get().getUsername());
         return user;
     }
 }
