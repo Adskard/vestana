@@ -1,7 +1,8 @@
 package cz.cvut.fel.nss.vestana.service;
 
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
-import cz.cvut.fel.nss.vestana.model.Loan;
+import com.sun.istack.NotNull;
+import cz.cvut.fel.nss.vestana.exception.NotFoundException;
 import cz.cvut.fel.nss.vestana.repo.ClothingArticleRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +21,34 @@ public class ClothingService {
         this.repo = repo;
     }
 
-    public void createItem(ClothingArticle item) {
-        repo.save(item);
+    public ClothingArticle getById(@NotNull Long id) {
+        Optional<ClothingArticle> result = repo.findById(id);
+        if(result.isPresent()) {
+            return result.get();
+        } else {
+            throw new NotFoundException("Article with id " + id + "does not exist!");
+        }
     }
 
-    public Optional<ClothingArticle> findItem(Long id) {
-        return repo.findById(id);
+    public ClothingArticle getByName(@NotNull String name) {
+        Optional<ClothingArticle> result = repo.findByName(name);
+        if(result.isPresent()) {
+            return result.get();
+        } else {
+            throw new NotFoundException("Article with name " + name + "does not exist!");
+        }
+    }
+
+    public ClothingArticle save(@NotNull ClothingArticle item) {
+        return repo.save(item);
+    }
+
+    public void deleteById(@NotNull Long id) throws NotFoundException {
+        Optional<ClothingArticle> toDelete = repo.findById(id);
+        if (toDelete.isPresent()) {
+            repo.deleteById(id);
+        } else {
+            throw new NotFoundException("Article with id " + id + "does not exist!");
+        }
     }
 }

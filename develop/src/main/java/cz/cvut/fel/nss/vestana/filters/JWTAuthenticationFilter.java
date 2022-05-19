@@ -17,7 +17,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import static cz.cvut.fel.nss.vestana.config.SecurityConstants.*;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
-
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {

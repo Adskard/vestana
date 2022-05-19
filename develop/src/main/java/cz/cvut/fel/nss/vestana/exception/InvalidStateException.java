@@ -10,6 +10,8 @@ public class InvalidStateException extends BaseException {
         super(message);
     }
 
+    public InvalidStateException() {}
+
     public InvalidStateException(String message, Throwable cause) {
         super(message, cause);
     }

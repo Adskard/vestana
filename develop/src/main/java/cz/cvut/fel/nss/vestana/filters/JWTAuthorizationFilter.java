@@ -1,63 +1,76 @@
 package cz.cvut.fel.nss.vestana.filters;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
-import com.auth0.jwt.interfaces.DecodedJWT;
-import org.springframework.security.authentication.AuthenticationManager;
+import com.sun.istack.NotNull;
+import cz.cvut.fel.nss.vestana.config.SecurityConstants;
+import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
+import cz.cvut.fel.nss.vestana.model.AppUserDetails;
+import cz.cvut.fel.nss.vestana.service.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Optional;
 
-import static cz.cvut.fel.nss.vestana.config.SecurityConstants.*;
+@Component @Slf4j @RequiredArgsConstructor
+public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
-public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
-
-    public JWTAuthorizationFilter(AuthenticationManager authManager) {
-        super(authManager);
-    }
+    final private UserDetailsServiceImpl userDetailsServiceImpl;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest req,
-                                    HttpServletResponse res,
-                                    FilterChain chain) throws IOException, ServletException {
-        String header = req.getHeader(HEADER_STRING);
+    protected void doFilterInternal(@NotNull HttpServletRequest req, @NotNull HttpServletResponse res, @NotNull FilterChain filterChain) throws ServletException, IOException {
+        log.info("Running Authorization filter");
 
-        if (header == null || !header.startsWith(TOKEN_PREFIX)) {
-            chain.doFilter(req, res);
+        if (req.getRequestURI().startsWith("/auth")) {
+            filterChain.doFilter(req, res);
             return;
         }
 
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+        try {
+            String jwtToken = parseTokenFromHeader(req).orElseThrow(InvalidStateException::new);
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
+            String username = JWT.decode(jwtToken).getSubject();
+
+            UserDetails userDetails = userDetailsServiceImpl.loadUserByUsername(username);
+
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Malformed or expirated token.");
+            return;
+        }
+
+        filterChain.doFilter(req, res);
     }
 
-    private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
-        String token = request.getHeader(HEADER_STRING);
-        if (token != null) {
-            // parse the token.
-            DecodedJWT decodedJWT = JWT.require(Algorithm.HMAC512(secret.getBytes()))
-                    .build()
-                    .verify(token.replace(TOKEN_PREFIX, ""));
-            String user = decodedJWT.getSubject();
-            String role = decodedJWT.getClaim("role").asString();
-            GrantedAuthority authority = new SimpleGrantedAuthority(role);
+    /**
+     * @param req HTTP request object with headers.
+     * @return parsed JWT token or empty if non-existent.
+     */
+    private Optional<String> parseTokenFromHeader(HttpServletRequest req) {
+        String authorizationHeader = req.getHeader("Authorization");
 
-            if (user != null) {
-                return new UsernamePasswordAuthenticationToken(user, null, Arrays.asList(authority));
-            }
-            return null;
+        if (StringUtils.hasText(authorizationHeader) && authorizationHeader.startsWith(SecurityConstants.TOKEN_PREFIX)) {
+            return Optional.of(
+                    authorizationHeader.substring(SecurityConstants.TOKEN_PREFIX.length())
+            );
         }
-        return null;
+
+        return Optional.empty();
     }
 }

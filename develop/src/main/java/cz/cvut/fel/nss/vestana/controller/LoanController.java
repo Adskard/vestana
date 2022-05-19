@@ -9,6 +9,7 @@ import cz.cvut.fel.nss.vestana.model.Loan;
 import cz.cvut.fel.nss.vestana.service.ClothingService;
 import cz.cvut.fel.nss.vestana.service.EmployeeService;
 import cz.cvut.fel.nss.vestana.service.LoanService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,13 +20,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/loans")
+@RequestMapping("/loan")
+@Slf4j
 public class LoanController {
 
     private final LoanService loanService;
-
     private final EmployeeService employeeService;
-
     private final ClothingService clothingService;
 
     @Autowired
@@ -35,6 +35,7 @@ public class LoanController {
         this.clothingService = clothingService;
     }
 
+    //@PreAuthorize("hasAnyRole('')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> finishLoan(@RequestBody() Loan loan) {
         final Loan newLoan = loan;
@@ -71,6 +72,7 @@ public class LoanController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
+    //@PreAuthorize("hasAnyRole('')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Loan getCurrentLoan() {
         // get the loan that the employee is putting together
@@ -78,6 +80,7 @@ public class LoanController {
         return null;
     }
 
+    //@PreAuthorize("hasAnyRole('')")
     @PutMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> addItem(@RequestBody ClothingArticle item) {
@@ -85,24 +88,26 @@ public class LoanController {
         try {
             loanService.addItem(loan, item);
         } catch (Exception e) {
-            //LOG.warn(e.getMessage());
+            log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //@PreAuthorize("hasAnyRole('')")
     @DeleteMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> removeItem(@RequestBody ClothingArticle item) {
         final Loan loan = getCurrentLoan();
         try {
             loanService.removeItem(loan, item);
         } catch (Exception e) {
-            //LOG.warn(e.getMessage());
+            log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //@PreAuthorize("hasAnyRole('')")
     @GetMapping("/{id}")
     public ResponseEntity<LoanDto> getLoan(@PathVariable Long id) {
         Optional<Loan> loan;
@@ -110,10 +115,9 @@ public class LoanController {
             loan = Optional.ofNullable(loanService.findLoan(id))
                     .orElseThrow(() -> new NotFoundException("Loan id " + id + " not found"));
         } catch (Exception e) {
-            //LOG.warn(e.getMessage());
+            log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return ResponseEntity.ok(loan.get().toDto());
     }
-
 }

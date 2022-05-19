@@ -1,7 +1,6 @@
 package cz.cvut.fel.nss.vestana.service;
 
 import com.sun.istack.NotNull;
-import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
 import cz.cvut.fel.nss.vestana.exception.NotFoundException;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import cz.cvut.fel.nss.vestana.model.Loan;

@@ -1,16 +1,16 @@
 package cz.cvut.fel.nss.vestana.model;
 
-
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class AppUserDetails implements UserDetails {
 
+    @Getter
     private final Employee user;
 
     public AppUserDetails(Employee user) {

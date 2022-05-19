@@ -1,14 +1,12 @@
 package cz.cvut.fel.nss.vestana.service;
 
 import cz.cvut.fel.nss.vestana.model.Employee;
-import cz.cvut.fel.nss.vestana.model.Loan;
 import cz.cvut.fel.nss.vestana.repo.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,10 +15,12 @@ import java.util.Optional;
 public class EmployeeService {
 
     private final EmployeeRepo repo;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public EmployeeService(EmployeeRepo repo) {
+    public EmployeeService(EmployeeRepo repo, PasswordEncoder passwordEncoder) {
         this.repo = repo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Optional<Employee> findById(Long id) {
@@ -28,7 +28,7 @@ public class EmployeeService {
     }
 
     public Employee findByUsername(String username) {
-        return repo.findByUsername(username);
+        return repo.findByUsername(username).get();
     }
 
     public List<Employee> findAll() {
@@ -39,7 +39,12 @@ public class EmployeeService {
         return users;
     }
 
+    @Deprecated
     public void addUser(Employee user) {
         repo.save(user);
+    }
+
+    public void register(Employee user) {
+        repo.save(new Employee(user.getUsername(), passwordEncoder.encode(user.getPassword())));
     }
 }

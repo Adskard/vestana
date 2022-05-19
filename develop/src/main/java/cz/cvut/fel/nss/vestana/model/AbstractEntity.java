@@ -15,6 +15,6 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private Long id;
 
-    @Column(columnDefinition = "BIT")
+    /*@Column(columnDefinition = "BIT")*/
     private boolean deleted = false;
 }

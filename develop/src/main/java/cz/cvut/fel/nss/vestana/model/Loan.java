@@ -1,8 +1,5 @@
 package cz.cvut.fel.nss.vestana.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import cz.cvut.fel.nss.vestana.dto.ClothingArticleDto;
-import cz.cvut.fel.nss.vestana.dto.CustomerDto;
 import cz.cvut.fel.nss.vestana.dto.LoanDto;
 import cz.cvut.fel.nss.vestana.model.enums.DeliveryType;
 import lombok.Data;
@@ -10,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
