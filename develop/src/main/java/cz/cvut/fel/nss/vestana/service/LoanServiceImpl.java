@@ -4,8 +4,8 @@ import com.sun.istack.NotNull;
 import cz.cvut.fel.nss.vestana.exception.NotFoundException;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import cz.cvut.fel.nss.vestana.model.Loan;
-import cz.cvut.fel.nss.vestana.repo.ClothingArticleRepo;
 import cz.cvut.fel.nss.vestana.repo.LoanRepo;
+import cz.cvut.fel.nss.vestana.service.interfaces.LoanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,19 +16,23 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class LoanService {
+public class LoanServiceImpl implements LoanService {
     
-    private LoanRepo repo;
-    private ClothingArticleRepo clothingArticleRepo;
+    private final LoanRepo repo;
 
     @Autowired
-    public LoanService(LoanRepo repo, ClothingArticleRepo clothingArticleRepo) {
+    public LoanServiceImpl(LoanRepo repo) {
         this.repo = repo;
-        this.clothingArticleRepo = clothingArticleRepo;
     }
 
-    public Optional<Loan> findLoan(Long id) {
-        return repo.findById(id);
+    @Override
+    public Loan findLoan(@NotNull Long id) {
+        Optional<Loan> result = repo.findById(id);
+        if (result.isPresent()) {
+            return result.get();
+        } else {
+            throw new NotFoundException("Loan with id " + id + "not found.");
+        }
     }
 
     public void removeItem(@NotNull Loan loan, @NotNull ClothingArticle item) {
@@ -50,6 +54,6 @@ public class LoanService {
         Objects.requireNonNull(loan);
         Objects.requireNonNull(item);
         List<ClothingArticle> items = loan.getLoanedItems();
-        return items.stream().anyMatch((i) -> i.getName() == item.getName());
+        return items.stream().anyMatch((i) -> i.getName().equals(item.getName()));
     }
 }

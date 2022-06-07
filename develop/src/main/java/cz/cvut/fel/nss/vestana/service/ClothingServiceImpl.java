@@ -4,6 +4,7 @@ import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import com.sun.istack.NotNull;
 import cz.cvut.fel.nss.vestana.exception.NotFoundException;
 import cz.cvut.fel.nss.vestana.repo.ClothingArticleRepo;
+import cz.cvut.fel.nss.vestana.service.interfaces.ClothingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,12 +13,12 @@ import java.util.Optional;
 
 @Service
 @Transactional
-public class ClothingService {
+public class ClothingServiceImpl implements ClothingService {
 
     private final ClothingArticleRepo repo;
 
     @Autowired
-    public ClothingService(ClothingArticleRepo repo) {
+    public ClothingServiceImpl(ClothingArticleRepo repo) {
         this.repo = repo;
     }
 

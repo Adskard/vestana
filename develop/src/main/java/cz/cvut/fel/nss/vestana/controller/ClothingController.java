@@ -2,12 +2,13 @@ package cz.cvut.fel.nss.vestana.controller;
 
 import cz.cvut.fel.nss.vestana.dto.ClothingArticleDto;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
-import cz.cvut.fel.nss.vestana.service.ClothingService;
+import cz.cvut.fel.nss.vestana.service.interfaces.ClothingService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -24,7 +25,7 @@ public class ClothingController {
         this.clothingService = clothingService;
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @PostMapping(value = "/new", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingArticleDto> createClothing(@RequestBody ClothingArticleDto itemDto) {
         ClothingArticle item = new ClothingArticle();
@@ -40,7 +41,7 @@ public class ClothingController {
         return ResponseEntity.created(location).build();
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<ClothingArticleDto> getClothing(@PathVariable Long id) {
         ClothingArticle item;

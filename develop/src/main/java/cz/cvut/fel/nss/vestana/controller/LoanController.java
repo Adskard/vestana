@@ -3,21 +3,19 @@ package cz.cvut.fel.nss.vestana.controller;
 import cz.cvut.fel.nss.vestana.controller.util.RestUtils;
 import cz.cvut.fel.nss.vestana.dto.LoanDto;
 import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
-import cz.cvut.fel.nss.vestana.exception.NotFoundException;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
 import cz.cvut.fel.nss.vestana.model.Loan;
-import cz.cvut.fel.nss.vestana.service.ClothingService;
-import cz.cvut.fel.nss.vestana.service.EmployeeService;
-import cz.cvut.fel.nss.vestana.service.LoanService;
+import cz.cvut.fel.nss.vestana.service.interfaces.ClothingService;
+import cz.cvut.fel.nss.vestana.service.interfaces.EmployeeService;
+import cz.cvut.fel.nss.vestana.service.interfaces.LoanService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/loan")
@@ -35,7 +33,7 @@ public class LoanController {
         this.clothingService = clothingService;
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> finishLoan(@RequestBody() Loan loan) {
         final Loan newLoan = loan;
@@ -72,7 +70,7 @@ public class LoanController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public Loan getCurrentLoan() {
         // get the loan that the employee is putting together
@@ -80,7 +78,7 @@ public class LoanController {
         return null;
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @PutMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> addItem(@RequestBody ClothingArticle item) {
@@ -94,7 +92,7 @@ public class LoanController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @DeleteMapping(value = "/items", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> removeItem(@RequestBody ClothingArticle item) {
         final Loan loan = getCurrentLoan();
@@ -107,17 +105,16 @@ public class LoanController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    //@PreAuthorize("hasAnyRole('')")
+    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<LoanDto> getLoan(@PathVariable Long id) {
-        Optional<Loan> loan;
+        Loan loan;
         try {
-            loan = Optional.ofNullable(loanService.findLoan(id))
-                    .orElseThrow(() -> new NotFoundException("Loan id " + id + " not found"));
+            loan = loanService.findLoan(id);
         } catch (Exception e) {
             log.warn(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return ResponseEntity.ok(loan.get().toDto());
+        return ResponseEntity.ok(loan.toDto());
     }
 }

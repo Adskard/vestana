@@ -7,7 +7,7 @@ import cz.cvut.fel.nss.vestana.dto.RegisterUserDto;
 import cz.cvut.fel.nss.vestana.dto.RegistrationResponse;
 import cz.cvut.fel.nss.vestana.model.AppUserDetails;
 import cz.cvut.fel.nss.vestana.model.Employee;
-import cz.cvut.fel.nss.vestana.service.EmployeeService;
+import cz.cvut.fel.nss.vestana.service.interfaces.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -28,6 +28,7 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final EmployeeService employeeService;
 
+    @PreAuthorize("isAnonymous()")
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(

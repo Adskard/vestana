@@ -1,6 +1,6 @@
 package cz.cvut.fel.nss.vestana.controller;
 
-import cz.cvut.fel.nss.vestana.service.ReservationService;
+import cz.cvut.fel.nss.vestana.service.interfaces.ReservationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
