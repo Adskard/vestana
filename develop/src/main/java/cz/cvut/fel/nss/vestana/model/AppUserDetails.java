@@ -12,14 +12,16 @@ public class AppUserDetails implements UserDetails {
 
     @Getter
     private final Employee user;
+    final private Collection<? extends GrantedAuthority> authorities;
 
     public AppUserDetails(Employee user) {
         this.user = user;
+        authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getClass().getSimpleName().toUpperCase()));
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(new SimpleGrantedAuthority(user.getClass().getName()));
+        return authorities;
     }
 
     @Override

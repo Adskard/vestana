@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.sun.istack.NotNull;
 import cz.cvut.fel.nss.vestana.config.SecurityConstants;
 import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
-import cz.cvut.fel.nss.vestana.model.AppUserDetails;
 import cz.cvut.fel.nss.vestana.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -51,7 +50,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {
             log.error(e.getMessage());
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Malformed or expirated token.");
+            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Malformed or expired token.");
             return;
         }
 

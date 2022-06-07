@@ -1,7 +1,7 @@
 package cz.cvut.fel.nss.vestana;
 
 import cz.cvut.fel.nss.vestana.model.Employee;
-import cz.cvut.fel.nss.vestana.service.EmployeeService;
+import cz.cvut.fel.nss.vestana.service.interfaces.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -21,16 +21,16 @@ public class SampleDataLoader implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        Employee user0 = createUser("user0");
+        //Employee user0 = createUser("user0");
 
     }
 
-    private Employee createUser(String name) {
+    /*private Employee createUser(String name) {
         Employee user = new Employee();
         user.setUsername(name);
         user.setPassword(passwordEncoder.encode("password"));
         employeeService.addUser(user);
         System.out.println(employeeService.findById(1L).get().getUsername());
         return user;
-    }
+    }*/
 }
