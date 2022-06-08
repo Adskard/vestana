@@ -28,7 +28,7 @@ Boot application and website presentation.
 | 05  | controllers         | 2-3                                         |        |   AS   |
 | 06  | git tasks/use case  | create system for correct commit naming     |  Done  |   AS   |
 | 07  | loan service        |                                             |        |   MK   |
-| 08  | clothing service    |                                             |        |   MK   |
+| 08  | clothing service    |                                             |  Done  |   MK   |
 
 
 ## Requirements
