@@ -4,17 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClothingArticleDto {
-    private Long id;
-    private boolean deleted;
+public class ClothingArticleCustomerInfo {
     private String name;
     private String description;
-    private String imagePath;
-    private int size;
     private double price;
+    private int size;
 }

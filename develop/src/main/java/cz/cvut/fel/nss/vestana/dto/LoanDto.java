@@ -33,6 +33,6 @@ public class LoanDto {
         private String description;
         private String imagePath;
         private int size;
-        private int price;
+        private double price;
     }
 }

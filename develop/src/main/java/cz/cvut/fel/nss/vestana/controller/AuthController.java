@@ -28,7 +28,6 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final EmployeeService employeeService;
 
-    @PreAuthorize("isAnonymous()")
     @PostMapping("login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
         Authentication authenticate = authenticationManager.authenticate(

@@ -1,15 +1,24 @@
 package cz.cvut.fel.nss.vestana.service.interfaces;
 
-import com.sun.istack.NotNull;
+import cz.cvut.fel.nss.vestana.dto.ClothingArticleCustomerInfo;
+import cz.cvut.fel.nss.vestana.dto.ClothingArticleDto;
 import cz.cvut.fel.nss.vestana.model.ClothingArticle;
+
+import java.util.List;
 
 public interface ClothingService {
 
     ClothingArticle getById(Long id);
 
-    ClothingArticle getByName(@NotNull String name);
+    ClothingArticle getByName(String name);
 
-    ClothingArticle save(@NotNull ClothingArticle item);
+    List<ClothingArticle> getAll();
 
-    void deleteById(@NotNull Long id);
+    ClothingArticle save(ClothingArticle item);
+
+    void update(ClothingArticleDto articleDto);
+
+    void deleteById(Long id);
+
+    ClothingArticleCustomerInfo getCustomerInfoByName(String name);
 }

@@ -3,11 +3,13 @@ package cz.cvut.fel.nss.vestana.filters;
 import com.auth0.jwt.JWT;
 import com.sun.istack.NotNull;
 import cz.cvut.fel.nss.vestana.config.SecurityConstants;
-import cz.cvut.fel.nss.vestana.exception.InvalidStateException;
+import cz.cvut.fel.nss.vestana.exception.NullTokenException;
 import cz.cvut.fel.nss.vestana.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -20,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Optional;
 
 @Component @Slf4j @RequiredArgsConstructor
@@ -37,7 +40,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         }
 
         try {
-            String jwtToken = parseTokenFromHeader(req).orElseThrow(InvalidStateException::new);
+            String jwtToken = parseTokenFromHeader(req).orElseThrow(NullTokenException::new);
 
             String username = JWT.decode(jwtToken).getSubject();
 
@@ -48,6 +51,12 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (NullTokenException e) {
+            log.info("Anonymous user");
+            /*SecurityContextHolder.getContext().setAuthentication(new AnonymousAuthenticationToken("AnonymousUser", "customer", Collections.singletonList(
+                                            new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));*/
+            filterChain.doFilter(req, res);
+            return;
         } catch (Exception e) {
             log.error(e.getMessage());
             res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Malformed or expired token.");

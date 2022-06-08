@@ -1,5 +1,6 @@
 package cz.cvut.fel.nss.vestana.model;
 
+import cz.cvut.fel.nss.vestana.dto.ClothingArticleCustomerInfo;
 import cz.cvut.fel.nss.vestana.dto.ClothingArticleDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -36,12 +37,23 @@ public class ClothingArticle extends AbstractEntity {
     @Column(nullable = false)
     @Getter
     @Setter
-    private int price;
+    private double price;
 
     @OneToOne(cascade = CascadeType.ALL)
     @Getter
     @Setter
     private ArticleAvailability availability;
+
+    public ClothingArticle() {
+    }
+
+    public ClothingArticle(ClothingArticleDto article) {
+        this.name = article.getName();
+        this.description = article.getDescription();
+        this.imagePath = article.getImagePath();
+        this.price = article.getPrice();
+        this.size = article.getSize();
+    }
 
     public ClothingArticleDto toDto() {
         ClothingArticleDto result = new ClothingArticleDto();
@@ -53,5 +65,9 @@ public class ClothingArticle extends AbstractEntity {
         result.setSize(getSize());
         result.setImagePath(getImagePath());
         return result;
+    }
+
+    public ClothingArticleCustomerInfo toClothingArticleCustomerInfo() {
+        return new ClothingArticleCustomerInfo(getName(), getDescription(), getPrice(), getSize());
     }
 }
