@@ -18,7 +18,7 @@ Boot application and website presentation.
   e.i. 01-user entities added
 - try to make at least three commits per task
 
-## TODO
+## TODO Backend
 | N°  | Task                | Details                                     | Status | Author |
 |:---:|---------------------|---------------------------------------------|:------:|:------:|
 | 01  | Basic entities      | based on the UML class diagram              |  Done  |   AS   |
@@ -30,6 +30,15 @@ Boot application and website presentation.
 | 07  | loan service        |                                             |        |   MK   |
 | 08  | clothing service    |                                             |  Done  |   MK   |
 
+## TODO Frontend
+| N°  | Task                | Details                                     | Status | Author |
+|:---:|---------------------|---------------------------------------------|:------:|:------:|
+| 01  | Overall look        | overall style and structure of pages        |        |   AŠ   |
+| 02  | Auth                | connected auth with basic checks            |        |   AŠ   |
+| 03  | Clothing display    | display list of available clothing          |        |   AŠ   |
+| 04  | Clothing article    | details of clothing article with reservation|        |   AŠ   |
+| 05  | Employee functions  | Reservation overview clothes CRUD           |        |   AŠ   |
+
 
 ## Requirements
 <!-- must be displayed per instructions -->
@@ -39,10 +48,10 @@ Boot application and website presentation.
 |----------------------------------|-------------|:-------------:|------------------------------------------------------------|
 | Technology/Language selection    | -           |     100%      | Java/SpringBoot                                            |
 | Readme.md documentation          | `Readme.md` |      40%      |                                                            |
-| Use of DB                        |             |               | relational/graph                                           |
-| Deployment on the server         |             |               | e.i. Heroku                                                |
-| SW architecture design selection |             |               | event base, pipe and filter,...                            |
-| Initialization instructions      |             |               | how to deploy, where to find basic data, such as admin psw |
+| Use of DB                        | Backend     |               | PostgreSQL                                                 |
+| Deployment on the server         |             |       0%      | Heroku                                                     |
+| SW architecture design selection |             |               | Monolith + 3 Tier                                          |
+| Initialization instructions      |`Readme.md`  |               | how to deploy, where to find basic data, such as admin psw |
 | Use 5 design patterns            |             |               | Must make sense.                                           |
 | Two UC per team member           |             |               | non-trivial, 3 members => 6 UC                             |
 
