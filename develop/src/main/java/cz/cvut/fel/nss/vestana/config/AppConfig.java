@@ -71,16 +71,6 @@ public class AppConfig {
     }
 
     @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").exposedHeaders(HttpHeaders.LOCATION);
-            }
-        };
-    }
-
-    @Bean
     @Scope("prototype")
     public Date currentDate() {
         return new Date();

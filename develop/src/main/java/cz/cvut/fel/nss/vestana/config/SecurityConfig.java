@@ -61,10 +61,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         val configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:3000", "https://nss-semestral.herokuapp.com/"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "X-Requested-With", "accept,Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", "Authorization", "Cache-Control", "Access-Control-Allow-Origin"));
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedHeaders(Arrays.asList("Content-Type", "X-Requested-With", "accept,Origin", "Access-Control-Request-Method",
+                "Access-Control-Request-Headers", "Authorization", "Cache-Control", "Access-Control-Allow-Origin"));
         configuration.setMaxAge(3600L);
 
         val source = new UrlBasedCorsConfigurationSource();

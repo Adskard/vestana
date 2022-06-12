@@ -4,5 +4,11 @@ setup:
       as: DATABASE
 build:
   docker:
-    app_api: ./develop/Dockerfile
-    app_ui: ./frontend/Dockerfile
+    backend: ./develop/Dockerfile
+    frontend: ./frontend/deploy.Dockerfile
+run:
+  frontend: npm start
+  backend: "java -Djava.security.egd=file:/dev/./urandom  -Dfile.encoding=UTF-8 -jar /app/vestana.jar"
+release:
+  frontend: npm build
+  backend: "java -Djava.security.egd=file:/dev/./urandom  -Dfile.encoding=UTF-8 -jar /app/vestana.jar"
