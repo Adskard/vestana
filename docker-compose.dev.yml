@@ -1,7 +1,9 @@
 services:
   ui:
     container_name: app_ui
-    build: ./frontend/dev.Dockerfile
+    build:
+      context: ./frontend/
+      dockerfile: dev.Dockerfile
     ports:
       - 3000:3000
 
