@@ -2,8 +2,10 @@ services:
   ui:
     container_name: app_ui
     build:
-      context: ./frontend/
-      dockerfile: dev.Dockerfile
+      context: ./develop/src/main/frontend/
+      dockerfile: Dockefile.dev
+    volumes:
+      - ./develop/src/main/frontend/src:/app/src
     ports:
       - 3000:3000
 
