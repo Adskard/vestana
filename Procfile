@@ -1,0 +1,1 @@
+java -jar develop/target/vestana-1.0-SNAPSHOT.jar
