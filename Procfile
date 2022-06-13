@@ -1,1 +1,1 @@
-web: java -jar develop/target/vestana-1.0-SNAPSHOT.jar
+web: java -jar develop/target/vestana-1.0-SNAPSHOT.jar --port $PORT
