@@ -1,9 +1,7 @@
 services:
   ui:
     container_name: app_ui
-    build:
-      context: ./develop/src/main/frontend/
-      dockerfile: Dockefile.dev
+    build: ./develop/src/main/frontend/
     volumes:
       - ./develop/src/main/frontend/src:/app/src
     ports:
@@ -11,7 +9,7 @@ services:
 
   api:
     container_name: app_api
-    build: ./develop/
+    build: ./
     environment:
       # note that "postgres" has to match the name of the postgres container
       SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/vestana"
