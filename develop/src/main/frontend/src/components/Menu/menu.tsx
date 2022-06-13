@@ -7,7 +7,7 @@ import "./menu.scss";
 export const Menu =({}) =>{
   const [expanded, setExpanded] = React.useState(false);
   const [token, setToken] = useState();
-    return <>
+    return <header>
     <Navbar collapseOnSelect sticky="top" expand="sm" expanded = {expanded} variant="dark" bg="blue">
       <Container>
         
@@ -30,7 +30,7 @@ export const Menu =({}) =>{
         </Navbar.Collapse>
       </Container>
     </Navbar>
-  </>;
+  </header>;
 };
 
 export default Menu;

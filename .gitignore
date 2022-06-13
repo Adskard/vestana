@@ -1,8 +1,8 @@
-.idea
-*.iws
-*.iml
-*.ipr
-*.properties
+.idea/
+**.iws
+**.iml
+**.ipr
+**.properties
 
 target/
 !.mvn/wrapper/maven-wrapper.jar

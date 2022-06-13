@@ -5,7 +5,7 @@ import "./clientBody.scss";
 export const ClientBody =({}) =>{
   return (
     <div className = "background" style={{ backgroundImage: `url(/background1.jpg)` }}>
-      <div className="text-container">
+      <div className="container">
           <Outlet />
       </div>
     </div>

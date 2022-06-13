@@ -46,11 +46,11 @@ Boot application and website presentation.
 ### Mandatory requirements
 | Functionality                    | Where       | Completed (%) | Details                                                    |
 |----------------------------------|-------------|:-------------:|------------------------------------------------------------|
-| Technology/Language selection    | -           |     100%      | Java/SpringBoot                                            |
-| Readme.md documentation          | `Readme.md` |      40%      |                                                            |
-| Use of DB                        | Backend     |               | PostgreSQL                                                 |
-| Deployment on the server         |             |       0%      | Heroku                                                     |
-| SW architecture design selection |             |               | Monolith + 3 Tier                                          |
+| Technology/Language selection    | -           |     100%      | Java/SpringBoot + JS/React                                 |
+| Readme.md documentation          | `Readme.md` |     100%      |                                                            |
+| Use of DB                        | Backend     |      100%     | PostgreSQL                                                 |
+| Deployment on the server         |[deployment](### Deployment) |     100%     | Heroku                                                     |
+| SW architecture design selection |             |     100%   | Monolith + 3 Tier                                          |
 | Initialization instructions      |`Readme.md`  |               | how to deploy, where to find basic data, such as admin psw |
 | Use 5 design patterns            |             |               | Must make sense.                                           |
 | Two UC per team member           |             |               | non-trivial, 3 members => 6 UC                             |
@@ -62,14 +62,28 @@ Boot application and website presentation.
 |--------------------------|-----------|:-------------:|------------------------------------------------|
 | Cache                    | `example` |      0%       | Hazelcast                                      |
 | Messaging principle      |           |      0%       | Kafka or JVM                                   |
-| Security                 |           |      0%       | Basic or OAuth2                                |
+| Security                 |JWT token  |  100%       | Basic or OAuth2                                |
 | Interceptor              |           |      0%       | e.i. logging                                   |
-| Use one given technology |           |      0%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
-| ElasticSearch            |           |      0%       |                                                |
-|                          |           |               |                                                |
+| Use one given technology | Controller - REST |      100%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
+| ElasticSearch            |NOT IMPLEMENTED|      0%       |                                                |
 
 ### Bonus requirements (+2 points if not present)
 | Functionality | Where | Completed (%) | Details    |
 |---------------|-------|:-------------:|------------|
-| Cloud service |       |      0%       | azure, aws |
+| Cloud service | NOT IMPLEMENTED |      0%       | azure, aws |
+
+
+### Deployment
+
+Can be deployed to Heroku with [Herocu CLI and git]("https://devcenter.heroku.com/articles/git").
+Steps:
+  1. add remote heroku repo as "heroku git:remote -a example-app"
+  1. add buildpack heroku/java
+  1. add postgreSQL DB and configure env variables for DB (datasource url, username, password, driver, ...)
+  1. push project to heroku to deploy "git push heroku main"
+
+
+References:
+ - [Spring boot and heroku](https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku)
+ - [Heroku maven plugin](https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin)
 
