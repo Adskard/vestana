@@ -38,7 +38,6 @@ public class ClothingController {
         return ResponseEntity.created(location).build();
     }
 
-    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping("/{id}")
     public ResponseEntity<ClothingArticleDto> getClothing(@PathVariable Long id) {
         ClothingArticle item;
@@ -51,7 +50,6 @@ public class ClothingController {
         return ResponseEntity.ok(item.toDto());
     }
 
-    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping()
     public ResponseEntity<List<ClothingArticleDto>> getAllArticles() {
         List<ClothingArticleDto> result;
@@ -77,7 +75,6 @@ public class ClothingController {
         return ResponseEntity.ok(result);
     }
 
-    @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @GetMapping("/name/{name}")
     public ResponseEntity<ClothingArticleDto> getClothingByName(@PathVariable String name) {
         ClothingArticle item;

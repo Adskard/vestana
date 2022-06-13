@@ -10,7 +10,7 @@ FROM openjdk:8
 
 WORKDIR /app
 COPY --from=MAVEN_BUILD /build/target/vestana-1.0-SNAPSHOT.jar /app/vestana.jar
-EXPOSE 5000
+EXPOSE 8080
 ENTRYPOINT [  "java",                                     \
               "-Dfile.encoding=UTF-8",                    \
               "-Djava.security.egd=file:/dev/./urandom",  \
