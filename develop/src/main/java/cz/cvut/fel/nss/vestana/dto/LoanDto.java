@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -16,9 +18,9 @@ public class LoanDto {
     private Long id;
     private boolean deleted;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date start;
+    private LocalDate start;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private Date end;
+    private LocalDate end;
     private DeliveryType deliveryType;
     private CustomerDto customer;
     private List<ItemDto> loanedItems;
