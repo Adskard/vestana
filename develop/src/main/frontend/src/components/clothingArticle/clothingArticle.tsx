@@ -1,8 +1,8 @@
 import * as React from "react";
 import { useParams } from "react-router";
-import "./article.scss";
+import "./clothingArticle.scss";
 
-export interface clothingArticle{
+export interface article{
   id : number,
   name : string,
   description : string,
@@ -10,9 +10,9 @@ export interface clothingArticle{
   price : number
 }
 
-export const Article =({}) =>{
+export const ClothingArticle =({}) =>{
   
-    const [Article, fetchArticle] = React.useState<clothingArticle>({id : 0,
+    const [Article, fetchArticle] = React.useState<article>({id : 0,
       name : "",
       description : "",
       size : 0,
@@ -51,4 +51,4 @@ export const Article =({}) =>{
       );
 };
 
-export default Article;
+export default ClothingArticle;

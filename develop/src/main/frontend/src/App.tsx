@@ -1,22 +1,26 @@
 import * as React from "react";
-import {Menu} from "./components/Menu/menu";
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import { About } from "./components/about";
-import { Home } from "./components/home";
-import { Clothes } from "./components/Clothes/clothes";
-import { ClientBody } from "./components/ClientBody/clientBody";
-import Article from "./components/Article/article";
-import { Contacts } from "./components/contacts";
-import { Signin } from "./components/signin";
-import { Register } from "./components/register";
+import Menu from "./components/menu/menu";
+import About from "./components/about";
+import Home from "./components/home";
+import Clothes from "./components/clothes/clothes";
+import Main from "./components/main/main";
+import Article from "./components/clothingArticle/clothingArticle";
+import Contacts from "./components/contacts";
+import Signin from "./components/signin";
+import Register from "./components/registration";
+import Footer from "./components/footer/footer";
+import { UserContext } from "./context";
+import { getCurrentUser } from "./service/authService";
 
 const App = ()=>{
+    const [authenticated, setAuthenticated] = React.useState()
 
-    return<>
+    return(
         <Router>
-            <Menu/>
+            <Menu authenticated={authenticated} setAuthenticated={setAuthenticated}/>
             <Routes>
-                <Route path="/" element={<ClientBody />}>
+                <Route path="/" element={<Main />}>
                     <Route index element={<Home />} />
                     <Route path="About" element={<About/>}/>
                     <Route path="Clothes">
@@ -24,11 +28,12 @@ const App = ()=>{
                         <Route path=":ArticleId" element={<Article />} />
                     </Route>
                     <Route path="Contacts" element={<Contacts />}/>
-                    <Route path="Signin" element={<Signin/>} />
+                    <Route path="Signin" element={<Signin setAuthenticated={setAuthenticated}/>} />
                     <Route path="Registration" element={<Register/>}/>
                 </Route> 
             </Routes>
+            <Footer/>
         </Router>
-    </>;
+    );
 }
 export default App;

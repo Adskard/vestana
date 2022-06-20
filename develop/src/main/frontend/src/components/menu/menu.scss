@@ -1,0 +1,20 @@
+$primary-color: #0D2551;
+$secondary-color: #455DA7;
+$text-color: #fff;
+
+.navbar {
+    
+    background-color: $primary-color;
+    nav.navbar{
+        padding: 0;
+    }
+    .active{
+        background: $secondary-color;
+      }
+    
+    a{
+        color: $text-color;
+    }
+}
+
+@import "~bootstrap/scss/bootstrap";

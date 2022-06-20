@@ -1,16 +1,15 @@
 $primary-color: #0D2551;
 $secondary-color: #455DA7;
 $text-color: #fff;
-
-.navbar {
-    
-    background-color: $primary-color;
-    .active{
+body {
+    footer{
+        width: 100%;
+        margin: 0;
+        height: 150px;
         background: $secondary-color;
-      }
-    
-    a{
-        color: $text-color;
+        position: absolute;
+        bottom: 0;
+        left: 0;
     }
 }
 
