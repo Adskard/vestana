@@ -14,27 +14,27 @@ interface clothingArticle{
 
 
 export const Clothes =({}) =>{
-  const [clothes, fetchClothes] = React.useState([]);
+  const [clothes, setClothes] = React.useState([]);
   const navigate = useNavigate();
 
   React.useEffect(()=>{
-    async function fetchAPI() {
+    //TODO: fetch clothes
+    //error fetching JSON response from backend
+    //response in not in JSON
+    const fetchClothes =  async () => {
       try{
         let url = '/item';
-        const response = await fetch("/item", {method: "Get"})
-        .then((result)=> result.json())
-        .then((data)=>{
-          console.log(data);
-          fetchClothes(data);
-        })
+        const response = await fetch("/item", {method: "Get"});
         console.log(response);
+        const data = await response.json();
+        console.log(data);
+        return data;
       }
       catch(er){
         console.error(er);
       }
     }  
-  
-    fetchAPI();
+    fetchClothes();
   }, [])
     return (<>
       <h1 className="font-weight-light">Clothes</h1>

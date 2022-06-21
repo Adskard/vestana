@@ -26,7 +26,7 @@ export const Menu =({authenticated, setAuthenticated} : MenuProps) =>{
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Contacts">Kontatky</Nav.Link>
           </Nav>
           {authenticated ? <>
-            <Container>{authenticated}</Container>
+            <Container><a>{authenticated}</a></Container>
             <Container><button onClick={()=>{
               setAuthenticated("");
               logout();

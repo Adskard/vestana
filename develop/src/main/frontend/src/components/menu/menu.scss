@@ -2,16 +2,19 @@ $primary-color: #0D2551;
 $secondary-color: #455DA7;
 $text-color: #fff;
 
-.navbar {
-    
+nav {
+    padding: 0;
     background-color: $primary-color;
-    nav.navbar{
-        padding: 0;
-    }
     .active{
         background: $secondary-color;
       }
-    
+    div.container{
+        padding: 0;
+
+    }
+    a:hover{
+        color: $text-color;
+    }
     a{
         color: $text-color;
     }
