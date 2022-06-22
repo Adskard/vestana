@@ -1,5 +1,6 @@
 package cz.cvut.fel.nss.vestana.model;
 
+import com.sun.istack.NotNull;
 import cz.cvut.fel.nss.vestana.dto.CustomerDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -28,12 +29,15 @@ public class Customer extends AbstractEntity {
     @Column(nullable = false)
     private String deliveryAddress;
 
-    public void bookReservation() {
-        // TODO
-    }
-
     public Customer() {
         this.name = name;
+    }
+
+    public Customer(@NotNull String name, @NotNull String email, @NotNull int phone, @NotNull String deliveryAddress) {
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.deliveryAddress = deliveryAddress;
     }
 
     public CustomerDto toDto() {
