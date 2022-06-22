@@ -33,8 +33,8 @@ Boot application and website presentation.
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
 |:---:|---------------------|---------------------------------------------|:------:|:------:|
-| 01  | Overall look        | overall style and structure of pages        |        |   AŠ   |
-| 02  | Auth                | connected auth with basic checks            |        |   AŠ   |
+| 01  | Overall look        | overall style and structure of pages        |Done    |   AŠ   |
+| 02  | Auth                | connected auth with basic checks            |Done    |   AŠ   |
 | 03  | Clothing display    | display list of available clothing          |        |   AŠ   |
 | 04  | Clothing article    | details of clothing article with reservation|        |   AŠ   |
 | 05  | Employee functions  | Reservation overview clothes CRUD           |        |   AŠ   |
@@ -46,12 +46,12 @@ Boot application and website presentation.
 ### Mandatory requirements
 | Functionality                    | Where       | Completed (%) | Details                                                    |
 |----------------------------------|-------------|:-------------:|------------------------------------------------------------|
-| Technology/Language selection    | -           |     100%      | Java/SpringBoot + JS/React                                 |
-| Readme.md documentation          | `Readme.md` |     100%      |                                                            |
+| Technology/Language selection    | -           |     100%      | Java/SpringBoot + JS/React + PostgreSQL                    |
+| Readme.md documentation          | here        |     100%      |                                                            |
 | Use of DB                        | Backend     |      100%     | PostgreSQL                                                 |
-| Deployment on the server         |[deployment](### Deployment) |     100%     | Heroku                                                     |
-| SW architecture design selection |             |     100%   | Monolith + 3 Tier                                          |
-| Initialization instructions      |`Readme.md`  |               | how to deploy, where to find basic data, such as admin psw |
+| Deployment on the server         |[deployment](# Deployment) |     100%     | Heroku  deploy                                |
+| SW architecture design selection | here        |     100%   | Monolith + 3 Tier (frontend, backend, db)                     |
+| Initialization instructions      |[deployment](# Deployment)  |50%  | how to deploy, where to find basic data, such as admin psw |
 | Use 5 design patterns            |             |               | Must make sense.                                           |
 | Two UC per team member           |             |               | non-trivial, 3 members => 6 UC                             |
 
@@ -77,11 +77,11 @@ Boot application and website presentation.
 
 Can be deployed to Heroku with [Herocu CLI and git]("https://devcenter.heroku.com/articles/git").
 Steps:
+  1. login to heroku "heroku login"
   1. add remote heroku repo as "heroku git:remote -a example-app"
   1. add buildpack heroku/java
   1. add postgreSQL DB and configure env variables for DB (datasource url, username, password, driver, ...)
   1. push project to heroku to deploy "git push heroku main"
-
 
 References:
  - [Spring boot and heroku](https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku)
