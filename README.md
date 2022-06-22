@@ -19,16 +19,17 @@ Boot application and website presentation.
 - try to make at least three commits per task
 
 ## TODO Backend
-| N°  | Task                | Details                                     | Status | Author |
-|:---:|---------------------|---------------------------------------------|:------:|:------:|
-| 01  | Basic entities      | based on the UML class diagram              |  Done  |   AS   |
-| 02  | DAO                 | generate DAO                                |        |   MK   |
-| 03  | reservation service | start service, for now focus on reservation |        |   MK   |
-| 04  | sign in / register  | most likely Basic authorization             |        |        |
-| 05  | controllers         | 2-3                                         |        |   AS   |
-| 06  | git tasks/use case  | create system for correct commit naming     |  Done  |   AS   |
-| 07  | loan service        |                                             |        |   MK   |
-| 08  | clothing service    |                                             |  Done  |   MK   |
+| N°  | Task                   | Details                                     | Status | Author |
+|:---:|------------------------|---------------------------------------------|:------:|:------:|
+| 01  | Basic entities         | based on the UML class diagram              |  Done  |   AS   |
+| 02  | DAO                    | generate DAO                                |  Done  |   MK   |
+| 03  | reservation service    | start service, for now focus on reservation |        |   MK   |
+| 04  | sign in / register     | most likely Basic authorization             |  Done  |   MK   |
+| 05  | controllers            | 2-3                                         |        |   AS   |
+| 06  | git tasks/use case     | create system for correct commit naming     |  Done  |   AS   |
+| 07  | loan service           |                                             |        |   MK   |
+| 08  | clothing service       |                                             |  Done  |   MK   |
+| 09  | reservation controller |                                             |  Done  |   MK   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
