@@ -38,7 +38,7 @@ public class Loan extends AbstractEntity {
     private List<ClothingArticle> loanedItems;
 
     public LoanDto toDto() {
-        List<LoanDto.ItemDto> items = this.loanedItems.stream()
+        List<LoanDto.ItemDto> items = loanedItems.stream()
                 .map(i -> new LoanDto.ItemDto(
                         i.getId(),
                         i.isDeleted(),
@@ -52,10 +52,10 @@ public class Loan extends AbstractEntity {
         LoanDto result = new LoanDto();
         result.setId(getId());
         result.setDeleted(isDeleted());
-        result.setStart(getStartDate());
-        result.setEnd(getEndDate());
-        result.setDeliveryType(getDeliveryType());
-        result.setCustomer(getCustomerToLoan().toDto());
+        result.setStart(startDate);
+        result.setEnd(endDate);
+        result.setDeliveryType(deliveryType);
+        result.setCustomer(customerToLoan.toDto());
         result.setLoanedItems(items);
         return result;
     }
@@ -71,7 +71,7 @@ public class Loan extends AbstractEntity {
     public void addItem(ClothingArticle item) {
         Objects.requireNonNull(item);
         if (loanedItems == null) {
-            this.loanedItems = new ArrayList<>();
+            loanedItems = new ArrayList<>();
         }
         loanedItems.add(item);
     }

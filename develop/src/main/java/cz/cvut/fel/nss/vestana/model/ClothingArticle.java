@@ -53,6 +53,7 @@ public class ClothingArticle extends AbstractEntity {
         this.imagePath = article.getImagePath();
         this.price = article.getPrice();
         this.size = article.getSize();
+        this.availability = new ArticleAvailability();
     }
 
     public ClothingArticleDto toDto() {
