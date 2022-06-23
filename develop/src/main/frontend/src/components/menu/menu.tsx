@@ -2,7 +2,7 @@ import * as React from "react";
 import {Navbar, Container, Nav} from 'react-bootstrap';
 import {NavLink } from "react-router-dom";
 import "./menu.scss";
-import { getCurrentUser, logout } from "../../service/authService";
+import { logout } from "../../service/authService";
 
 type MenuProps = {
   authenticated : string
@@ -26,7 +26,7 @@ export const Menu =({authenticated, setAuthenticated} : MenuProps) =>{
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Contacts">Kontatky</Nav.Link>
           </Nav>
           {authenticated ? <div className ="">
-            <Container><a>{authenticated}</a></Container>
+            <Container><p>{authenticated}</p></Container>
             <Container><button onClick={()=>{
               setAuthenticated("");
               logout();

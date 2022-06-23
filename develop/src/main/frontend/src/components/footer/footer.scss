@@ -1,15 +1,29 @@
-$primary-color: #0D2551;
-$secondary-color: #455DA7;
-$text-color: #fff;
-body {
-    footer{
-        width: 100%;
-        margin: 0;
-        max-height: 100px;
-        height: 7rem;
-        background: $secondary-color;
-        left: 0;
-    }
-}
+@import "../../styles/_variables";
 
-@import "~bootstrap/scss/bootstrap";
+footer{
+    padding: 1rem 0rem;
+    width: 100%;
+    margin: 0;
+    max-height: 100px;
+    height: 7rem;
+    display: flex;
+    background: $primary-color;
+    left: 0;
+    bottom: 0;
+    div{
+        flex: 1;
+        padding-left: 2rem;
+        p{
+            color: $text-color-bg;
+            margin: 0;
+        }
+    }
+    div.right{
+        align-items: flex-end;
+    }
+
+    div.left{
+        align-items: flex-start;
+    }
+    
+}

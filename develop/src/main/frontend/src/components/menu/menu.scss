@@ -1,5 +1,4 @@
 @import "../../styles/_variables";
-@import "~bootstrap/scss/bootstrap";
 
 nav.navbar {
     padding: 0;
@@ -12,9 +11,11 @@ nav.navbar {
         a.nav-link:hover{
             color: $text-color-bg;
         }
-        a.nav-linka.nav-link{
+        a.nav-link{
             color: $text-color-bg;
-            padding: 12;
+            padding: 1rem;
+            font-size: 18px;
+            white-space: nowrap;
         }
     }
     

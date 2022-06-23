@@ -1,4 +1,5 @@
 import * as React from 'react';
+import "./styles/global.scss"
 import App from './App';
 import { createRoot } from 'react-dom/client';
 
