@@ -37,7 +37,7 @@ export const Signin=({setAuthenticated} : SigninProps)=>{
     return <>
         <div className="login-wrapper">
       <h1>Přihlašte se</h1>
-      <div> {message}</div>
+      <div className= "text-danger"> {message}</div>
       <Formik 
       initialValues = {initialValues}
       onSubmit= {handleSubmit}>
@@ -48,7 +48,7 @@ export const Signin=({setAuthenticated} : SigninProps)=>{
             <ErrorMessage
               name="username"
               component="div"
-              className="alert alert-danger"
+              className="text-danger"
             />
           </div>
           <div className="form-group">
@@ -57,7 +57,7 @@ export const Signin=({setAuthenticated} : SigninProps)=>{
             <ErrorMessage
               name="password"
               component="div"
-              className="alert alert-danger"
+              className="text-danger"
             />
           </div>
           <div className="form-group">

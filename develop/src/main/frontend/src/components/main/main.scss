@@ -1,14 +1,22 @@
-$primary-color: white;
+@import "../../styles/_variables";
+@import "~bootstrap/scss/bootstrap";
 
 body {
+    margin: 0;
+    padding: 0;
     main{
+        height:100vh;
+        padding: 2rem 5rem;
         div.container{
-            background-color: $primary-color;
+            background-color: $tertiary-color;
             padding: 2rem 5rem;
+            min-width: 80vh;
+            height: 100%;
             opacity: 92%;
             overflow-y: scroll;
+            p{
+                overflow: hidden;
+            }
         }
     }
 }
-
-@import "~bootstrap/scss/bootstrap";

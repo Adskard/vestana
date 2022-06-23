@@ -4,7 +4,7 @@ import * as React from "react";
 export const About =({}) =>{
     return (
       <div className="">
-      <h1 className="font-weight-light">About</h1>
+      <h1 className="font-weight-light">O nás</h1>
       <p>
       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Fusce suscipit libero eget elit. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. Etiam dui sem, fermentum vitae, sagittis id, malesuada in, quam. Sed vel lectus. Donec odio tempus molestie, porttitor ut, iaculis quis, sem. Curabitur ligula sapien, pulvinar a vestibulum quis, facilisis vel sapien. Aenean vel massa quis mauris vehicula lacinia. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Phasellus rhoncus. Etiam dictum tincidunt diam. Mauris dictum facilisis augue. Sed elit dui, pellentesque a, faucibus vel, interdum nec, diam.
 

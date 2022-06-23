@@ -1,8 +1,7 @@
-$primary-color: #0D2551;
-$secondary-color: #455DA7;
-$text-color: #fff;
+@import "../../styles/_variables";
+@import "~bootstrap/scss/bootstrap";
 
-nav {
+nav.navbar {
     padding: 0;
     background-color: $primary-color;
     .active{
@@ -10,14 +9,14 @@ nav {
       }
     div.container{
         padding: 0;
-
+        a.nav-link:hover{
+            color: $text-color-bg;
+        }
+        a.nav-linka.nav-link{
+            color: $text-color-bg;
+            padding: 12;
+        }
     }
-    a:hover{
-        color: $text-color;
-    }
-    a{
-        color: $text-color;
-    }
+    
 }
 
-@import "~bootstrap/scss/bootstrap";

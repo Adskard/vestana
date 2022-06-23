@@ -13,32 +13,32 @@ export const Menu =({authenticated, setAuthenticated} : MenuProps) =>{
   const [expanded, setExpanded] = React.useState(false);
 
   return <header>
-    <Navbar collapseOnSelect sticky="top" expand="sm" expanded = {expanded} variant="dark" bg="blue">
-      <Container>
+    <Navbar collapseOnSelect sticky="top" expand="sm" expanded = {expanded} variant="dark">
+      <Container className = "container-fluid">
         <Navbar.Toggle onClick={() => setExpanded(expanded ? false : true)} label="Toggle menu" aria-controls="responsive-navbar-nav"/>
         <Nav>
           <Nav.Link as={NavLink} to="/">Vestana</Nav.Link>
         </Nav>
         <Navbar.Collapse id="responsive-navbar-nav" role="">
-          <Nav className="left-side">
+          <Nav className="d-flex">
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/About">O nás</Nav.Link>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Clothes">Oděvy</Nav.Link>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Contacts">Kontatky</Nav.Link>
           </Nav>
-          {authenticated ? <>
+          {authenticated ? <div className ="">
             <Container><a>{authenticated}</a></Container>
             <Container><button onClick={()=>{
               setAuthenticated("");
               logout();
             }}>Odhlásit se</button></Container>
-            </> 
+            </div> 
             :
-            <>
-            <Nav className="d-flex justify-content-end">
+            <div  className="justify-content-end">
+            <Nav>
               <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Signin">Přihlásit se</Nav.Link>
               <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Registration">Registrovat</Nav.Link>
             </Nav>
-          </>}
+          </div>}
         </Navbar.Collapse>
       </Container>
     </Navbar>

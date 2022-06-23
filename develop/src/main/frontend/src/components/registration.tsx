@@ -46,7 +46,7 @@ export const Registration=()=>{
     return <>
         <div className="login-wrapper">
       <h1>Registrace</h1>
-      <div> {message}</div>
+      <div className= "text-danger"> {message}</div>
       <Formik 
       validateOnMount
       initialErrors={{username: "Povinné pole",
