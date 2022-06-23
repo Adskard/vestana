@@ -31,7 +31,7 @@ public class UserController {
         return ResponseEntity.ok(userService.mapUsersToEmployeesDto(users));
     }
 
-    @GetMapping(value = "/username/{username}")
+    @GetMapping(value = "/username/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<EmployeeDto> getUserByUsername(@PathVariable String username) {
         Employee user;
         try {
