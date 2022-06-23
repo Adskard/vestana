@@ -1,0 +1,22 @@
+@import "../../styles/_variables";
+@import "~bootstrap/scss/bootstrap";
+
+nav.navbar {
+    padding: 0;
+    background-color: $primary-color;
+    .active{
+        background: $secondary-color;
+      }
+    div.container{
+        padding: 0;
+        a.nav-link:hover{
+            color: $text-color-bg;
+        }
+        a.nav-linka.nav-link{
+            color: $text-color-bg;
+            padding: 12;
+        }
+    }
+    
+}
+
