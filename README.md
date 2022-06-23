@@ -31,6 +31,7 @@ Boot application and website presentation.
 | 08  | clothing service       |                                             |  Done  |   MK   |
 | 09  | reservation controller |                                             |  Done  |   MK   |
 | 10  | interceptor            | create interceptor for logging requests     |  Done  |   AS   |
+| 11  | runner                 | app initialization                          |  Done  |   MK   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
