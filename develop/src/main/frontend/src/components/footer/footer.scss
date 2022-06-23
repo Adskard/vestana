@@ -1,0 +1,15 @@
+$primary-color: #0D2551;
+$secondary-color: #455DA7;
+$text-color: #fff;
+body {
+    footer{
+        width: 100%;
+        margin: 0;
+        max-height: 100px;
+        height: 7rem;
+        background: $secondary-color;
+        left: 0;
+    }
+}
+
+@import "~bootstrap/scss/bootstrap";
