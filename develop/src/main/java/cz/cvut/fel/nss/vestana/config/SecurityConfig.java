@@ -46,10 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/user/*").authenticated()
-                .antMatchers(HttpMethod.GET, "/reservation/*").authenticated()
-                .antMatchers(HttpMethod.GET, "/loan/*").authenticated()
-                .anyRequest().permitAll();
+                .antMatchers(HttpMethod.POST, "/auth/*").permitAll()
+                .antMatchers(HttpMethod.GET, "/item/*").permitAll()
+                .antMatchers(HttpMethod.POST, "/reservation/new").permitAll()
+                .antMatchers(HttpMethod.POST, "/reservation/availabilityCheck").permitAll()
+                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
