@@ -77,7 +77,7 @@ public class ReservationServiceImpl implements ReservationService {
             if (article.isPresent()) {
                 List<TimeEvent> eventList = article.get().getAvailability().getEventList();
                 for (TimeEvent event : eventList) {
-                    if (!event.getEndTime().isBefore(startTime) && !event.getStartTime().isAfter(endTime)) {
+                    if (!event.getEndTime().isBefore(startTime) && !event.getStartTime().isAfter(endTime) && !event.isDeleted()) {
                         return false;
                     }
                 }
@@ -191,11 +191,8 @@ public class ReservationServiceImpl implements ReservationService {
         } else if (newStartTime.isBefore(endTime) && (newStartTime.isAfter(startTime) || newStartTime.isEqual(startTime))
                 && checkArticlesAvailability(bookedItems, endTime.plusNanos(1), newEndTime)) {
             return true;
-        } else if ((newStartTime.isAfter(endTime) || newStartTime.isEqual(endTime))
-                && checkArticlesAvailability(bookedItems, newStartTime.plusNanos(1), newEndTime)) {
-            return true;
-        }
-        return false;
+        } else return (newStartTime.isAfter(endTime) || newStartTime.isEqual(endTime))
+                && checkArticlesAvailability(bookedItems, newStartTime.plusNanos(1), newEndTime);
     }
 
     @Override
@@ -204,10 +201,12 @@ public class ReservationServiceImpl implements ReservationService {
         if (toDelete.isPresent()) {
             Reservation reservation = toDelete.get();
             reservation.setDeleted(true);
-            // TODO time event delete, availability update
+            TimeEvent event = reservation.getEvent();
+            event.setDeleted(true);
+            eventRepo.save(event);
             repo.save(reservation);
         } else {
-            throw new NotFoundException("Reservation with id " + id + "does not exist!");
+            throw new NotFoundException("Reservation with id " + id + " does not exist!");
         }
     }
 }
