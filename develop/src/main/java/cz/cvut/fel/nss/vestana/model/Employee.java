@@ -3,6 +3,8 @@ package cz.cvut.fel.nss.vestana.model;
 import cz.cvut.fel.nss.vestana.dto.EmployeeDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -18,12 +20,13 @@ public class Employee extends AbstractEntity {
 
     @Basic(optional = false)
     @Column(nullable = false)
+    @Setter
+    @Getter
     private String password;
 
     public EmployeeDto toDto() {
         EmployeeDto result = new EmployeeDto();
         result.setId(getId());
-        //result.setDeleted(isDeleted());
         result.setUsername(getUsername());
         return result;
     }
