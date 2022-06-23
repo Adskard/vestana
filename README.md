@@ -30,6 +30,7 @@ Boot application and website presentation.
 | 07  | loan service           |                                             |        |   MK   |
 | 08  | clothing service       |                                             |  Done  |   MK   |
 | 09  | reservation controller |                                             |  Done  |   MK   |
+| 10  | interceptor            | create interceptor for logging requests     |  Done  |   AS   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
@@ -68,7 +69,7 @@ Boot application and website presentation.
 | Use one given technology | Controller - REST |      100%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
 | ElasticSearch            |NOT IMPLEMENTED|      0%       |                                                |
 
-### Bonus requirements (+2 points if not present)
+### Bonus requirements (+2 points if present)
 | Functionality | Where | Completed (%) | Details    |
 |---------------|-------|:-------------:|------------|
 | Cloud service | NOT IMPLEMENTED |      0%       | azure, aws |
