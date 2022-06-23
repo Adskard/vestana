@@ -87,6 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new Exception("Username is already in use.");
         }
 
-        return repo.save(new Employee(newUser.getUsername(), passwordEncoder.encode(newUser.getPassword())));
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        return repo.save(newUser);
     }
 }

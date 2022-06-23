@@ -47,6 +47,15 @@ public class ClothingArticle extends AbstractEntity {
     public ClothingArticle() {
     }
 
+    public ClothingArticle(String name, String description, String imagePath, int size, double price) {
+        this.name = name;
+        this.description = description;
+        this.imagePath = imagePath;
+        this.size = size;
+        this.price = price;
+        this.availability = new ArticleAvailability();
+    }
+
     public ClothingArticle(ClothingArticleDto article) {
         this.name = article.getName();
         this.description = article.getDescription();
