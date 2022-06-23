@@ -2,7 +2,6 @@ package cz.cvut.fel.nss.vestana.model;
 
 import lombok.Data;
 
-import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -15,6 +14,5 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private Long id;
 
-    /*@Column(columnDefinition = "BIT")*/
     private boolean deleted = false;
 }
