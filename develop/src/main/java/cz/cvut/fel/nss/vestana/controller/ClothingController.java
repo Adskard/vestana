@@ -38,7 +38,7 @@ public class ClothingController {
         return ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingArticleDto> getClothing(@PathVariable Long id) {
         ClothingArticle item;
         try {
@@ -50,7 +50,7 @@ public class ClothingController {
         return ResponseEntity.ok(item.toDto());
     }
 
-    @GetMapping()
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClothingArticleDto>> getAllArticles() {
         List<ClothingArticleDto> result;
         try {
@@ -63,7 +63,7 @@ public class ClothingController {
     }
 
     // Anonymous user
-    @GetMapping("info")
+    @GetMapping(value = "info", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ClothingArticleCustomerInfo>> getAllArticlesCustomerInfo() {
         List<ClothingArticleCustomerInfo> result;
         try {
@@ -75,7 +75,7 @@ public class ClothingController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/name/{name}")
+    @GetMapping(value = "/name/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingArticleDto> getClothingByName(@PathVariable String name) {
         ClothingArticle item;
         try {
@@ -88,7 +88,7 @@ public class ClothingController {
     }
 
     // Anonymous user
-    @GetMapping("/info/{name}")
+    @GetMapping(value = "/info/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingArticleCustomerInfo> getCustomerInfo(@PathVariable String name) {
         ClothingArticleCustomerInfo item;
         try {
@@ -101,7 +101,7 @@ public class ClothingController {
     }
 
     @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
-    @PutMapping("/update")
+    @PutMapping(value = "/update", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> updateClothing(@RequestBody ClothingArticleDto item) {
         try {
             clothingService.update(item);
