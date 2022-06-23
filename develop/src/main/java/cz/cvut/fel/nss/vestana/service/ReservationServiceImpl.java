@@ -116,19 +116,86 @@ public class ReservationServiceImpl implements ReservationService {
 
     @Override
     public ReservationResponse update(ReservationRequest reservationRequest, Long id) {
-        // TODO availability check
-        if (!checkArticlesAvailability(reservationRequest.getBookedItems(), reservationRequest.getStartTime(), reservationRequest.getEndTime())) {
+        if (!checkUpdatedArticleAvailability(reservationRequest, id)) {
             throw new InvalidStateException("Some articles are not available!");
         }
         Reservation reservation = getById(id);
+        List<ClothingArticle> oldItems = reservation.getBookedItems();
         reservation.setStartTime(reservationRequest.getStartTime());
         reservation.setEndTime(reservationRequest.getEndTime());
         Customer customer = customerRepo.save(new Customer(reservationRequest.getCustomer().getName(), reservationRequest.getCustomer().getEmail(), reservationRequest.getCustomer().getPhone(), reservationRequest.getCustomer().getDeliveryAddress()));
         reservation.setCustomer(customer);
         List<ClothingArticle> bookedItems = findBookedItems(reservationRequest.getBookedItems());
         reservation.setBookedItems(bookedItems);
-        // TODO time event update
+        reservation.setEmployee(null);
+        reservation = setUpdatedTimeEvent(reservation, oldItems);
         return repo.save(reservation).toDto();
+    }
+
+    private Reservation setUpdatedTimeEvent(Reservation reservation, List<ClothingArticle> oldItems) {
+        Optional<TimeEvent> optional = eventRepo.findById(reservation.getEvent().getId());
+        TimeEvent event;
+        if (optional.isPresent()) {
+            event = optional.get();
+        } else {
+            throw new NotFoundException("Time event with id " + reservation.getEvent().getId() + " not exists.");
+        }
+        event.setStartTime(reservation.getStartTime());
+        event.setEndTime(reservation.getEndTime());
+        event = eventRepo.save(event);
+        reservation.setEvent(event);
+        setUpdatedArticleAvailability(reservation.getBookedItems(), event, oldItems);
+        return reservation;
+    }
+
+    private void setUpdatedArticleAvailability(List<ClothingArticle> items, TimeEvent event, List<ClothingArticle> oldItems) {
+        oldItems.forEach(i -> {
+            ArticleAvailability availability = i.getAvailability();
+            availability.removeEvent(eventRepo.findById(event.getId()).get());
+            availabilityRepo.save(availability);
+        });
+
+        items.forEach(i -> {
+            ArticleAvailability availability = i.getAvailability();
+            availability.addEvent(event);
+            availabilityRepo.save(availability);
+        });
+    }
+
+    private boolean checkUpdatedArticleAvailability(ReservationRequest reservationRequest, Long id) {
+        Optional<Reservation> optional = repo.findById(id);
+        Reservation reservation;
+        if (optional.isPresent()) {
+            reservation = optional.get();
+        } else {
+            return false;
+        }
+        LocalDateTime startTime = reservation.getStartTime();
+        LocalDateTime endTime = reservation.getEndTime();
+        LocalDateTime newStartTime = reservationRequest.getStartTime();
+        LocalDateTime newEndTime = reservationRequest.getEndTime();
+        List<Long> bookedItems = reservationRequest.getBookedItems();
+
+        if ((newEndTime.isBefore(startTime) || newEndTime.isEqual(startTime))
+                && checkArticlesAvailability(bookedItems, newStartTime, newEndTime.minusNanos(1))) {
+                    return true;
+        } else if (newStartTime.isBefore(startTime) && newEndTime.isAfter(startTime) && (newEndTime.isBefore(endTime) || newEndTime.isEqual(endTime))
+                && checkArticlesAvailability(bookedItems, newStartTime, startTime.minusNanos(1))) {
+            return true;
+        } else if ((newStartTime.isAfter(startTime) || newStartTime.isEqual(startTime)) && (newEndTime.isBefore(endTime) || newEndTime.isEqual(endTime))) {
+            return true;
+        } else if (newStartTime.isBefore(startTime) && newEndTime.isAfter(endTime)
+                && checkArticlesAvailability(bookedItems, newStartTime, startTime.minusNanos(1))
+                && checkArticlesAvailability(bookedItems, endTime.plusNanos(1), newEndTime)) {
+            return true;
+        } else if (newStartTime.isBefore(endTime) && (newStartTime.isAfter(startTime) || newStartTime.isEqual(startTime))
+                && checkArticlesAvailability(bookedItems, endTime.plusNanos(1), newEndTime)) {
+            return true;
+        } else if ((newStartTime.isAfter(endTime) || newStartTime.isEqual(endTime))
+                && checkArticlesAvailability(bookedItems, newStartTime.plusNanos(1), newEndTime)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
