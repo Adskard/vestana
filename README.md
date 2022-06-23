@@ -64,8 +64,8 @@ Boot application and website presentation.
 |--------------------------|-----------|:-------------:|------------------------------------------------|
 | Cache                    | `example` |      0%       | Hazelcast                                      |
 | Messaging principle      |           |      0%       | Kafka or JVM                                   |
-| Security                 |JWT token  |  100%       | Basic or OAuth2                                |
-| Interceptor              |           |      0%       | e.i. logging                                   |
+| Security                 |JWT token  |     100%      | Basic or OAuth2                                |
+| Interceptor              | Logging   |     100%      | e.i. logging                                   |
 | Use one given technology | Controller - REST |      100%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
 | ElasticSearch            |NOT IMPLEMENTED|      0%       |                                                |
 
