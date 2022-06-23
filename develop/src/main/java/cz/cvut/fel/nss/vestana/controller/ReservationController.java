@@ -91,7 +91,7 @@ public class ReservationController {
 
     @PreAuthorize("hasAnyRole('EMPLOYEE', 'ADMIN')")
     @PutMapping("/edit/{id}")
-    public ResponseEntity<ReservationResponse> updateReservation(ReservationRequest reservation, @PathVariable Long id) {
+    public ResponseEntity<ReservationResponse> updateReservation(@RequestBody ReservationRequest reservation, @PathVariable Long id) {
         ReservationResponse result;
         try {
             result = reservationService.update(reservation, id);
