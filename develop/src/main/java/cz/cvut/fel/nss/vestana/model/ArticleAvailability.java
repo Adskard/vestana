@@ -8,6 +8,7 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Table(name = "AVAILABILITY")
@@ -28,5 +29,12 @@ public class ArticleAvailability extends AbstractEntity {
             this.eventList = new ArrayList<>();
         }
         eventList.add(event);
+    }
+
+    public void removeEvent(@NotNull TimeEvent event) {
+        if (eventList == null) {
+            return;
+        }
+        eventList.remove(event);
     }
 }
