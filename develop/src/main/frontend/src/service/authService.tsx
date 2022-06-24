@@ -16,9 +16,15 @@ export async function login(username: string, password: string){
         console.log(result.status);
         if(result.ok){
             const response = await result.json();
-            response["username"] = username;
+            
             if(response.accessToken){
-                localStorage.setItem("user", JSON.stringify(result));
+                
+                const user = {
+                    "accessToken": response.accessToken,
+                    "username" : username
+                };
+                const data = JSON.stringify(user);
+                localStorage.setItem("user", data);
                 console.log(username + " succesfully loged in");
             }
         }
@@ -34,7 +40,6 @@ export async function login(username: string, password: string){
 export function logout(){
     console.log("Logging out");
     localStorage.removeItem("user");
-    localStorage.removeItem("username");
 }
 
 export async function register(username: String, password: String){
@@ -62,7 +67,9 @@ export async function register(username: String, password: String){
 }
 
 export function getCurrentUser(){
-    const userStr = localStorage.getItem("username");
-    if (userStr) return userStr;
+    const userStr = localStorage.getItem("user");
+    let user;
+    if(userStr){user = JSON.parse(userStr)};
+    if (userStr && user.username) return user.username;
     return null;
 }

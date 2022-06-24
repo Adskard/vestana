@@ -34,7 +34,7 @@ export const Registration=()=>{
             setMessage("Něco se pokazilo zkuste to znovu později");
         }
         if(response.ok){
-            navigate("/");
+            navigate("/Signin");
         }
         else if(response){
             setMessage("Uživatelké jméno už existuje")

@@ -12,28 +12,30 @@ export interface article{
 
 export const ClothingArticle =({}) =>{
   
-    const [Article, fetchArticle] = React.useState<article>({id : 0,
+    const [Article, setArticle] = React.useState<article>({id : 0,
       name : "",
       description : "",
       size : 0,
       price : 0});
     let {ArticleId} = useParams();
 
-    const getData = async () => {
-      console.log("Fetching clothing article data")
-      await fetch("/item/"+ ArticleId, {method: "Get"})
-        .then((result)=> result.json())
-        .then((result)=>{
-          console.log(result);
-          fetchArticle(result);
-        })
-        .catch((error)=>
-        console.error("Error :", error ))
-    };
 
     React.useEffect(()=>{
-      getData();
-    }, [ArticleId])
+      const fetchArticle =  async () => {
+        try{
+          const url = "http://localhost:8080";
+          const response = await fetch(url + "/item/"+ ArticleId, {method: "Get"});
+          console.log(response);
+          const data = await response.json();
+          console.log(data);
+          setArticle(data);
+        }
+        catch(er){
+          console.error(er);
+        }
+      }  
+      fetchArticle();
+    }, [])
     
     return (
         <div className="about">

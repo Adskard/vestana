@@ -11,11 +11,16 @@ import Signin from "./components/signin";
 import Register from "./components/registration";
 import Footer from "./components/footer/footer";
 import Loans from "./components/loans/loans";
+import { getCurrentUser } from "./service/authService";
 
 const App = ()=>{
-    const [authenticated, setAuthenticated] = React.useState();
+    const [authenticated, setAuthenticated] = React.useState(getCurrentUser());
 
     const protectedRoutes = <Route path="Loans"  element ={<Loans/>}/>;
+
+    React.useEffect(()=>{
+        setAuthenticated(getCurrentUser())
+    },[])
 
     return(
         <Router>

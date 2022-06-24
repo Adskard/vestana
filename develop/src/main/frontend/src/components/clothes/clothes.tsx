@@ -16,19 +16,15 @@ interface clothingArticle{
 export const Clothes =({}) =>{
   const [clothes, setClothes] = React.useState([]);
   const navigate = useNavigate();
-
   React.useEffect(()=>{
-    //TODO: fetch clothes
-    //error fetching JSON response from backend
-    //response in not in JSON
     const fetchClothes =  async () => {
       try{
-        let url = '/item';
-        const response = await fetch("/item", {method: "Get"});
+        const url = "http://localhost:8080";
+        const response = await fetch(url + "/item", {method: "Get"});
         console.log(response);
         const data = await response.json();
         console.log(data);
-        return data;
+        setClothes(data);
       }
       catch(er){
         console.error(er);

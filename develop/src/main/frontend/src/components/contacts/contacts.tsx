@@ -57,8 +57,9 @@ export const Contacts =({}) =>{
                 .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Nevalidní email"),
                 tel: Yup.string()
                 .required("Povinné pole")
-                .matches(/^[0-9]*$/, "Telefoní čísla obsahují jen číslice")
-                .test('len', 'Délka číslo musí mít 9 číslic',  val  =>  val.length === 9),
+                .max(9, "číslo může mít maximálně 9 číslic")
+                .matches(/^[0-9]*$/, "Telefoní čísla obsahují jen číslice"),
+                //.test('len', 'Délka číslo musí mít 9 číslic',  val  =>  val.length === 9),
                 name: Yup.string()
                 .required("Povinné pole")
                 .min(3, "Jméno musí obsahovat alespoň 3 znaky"),
