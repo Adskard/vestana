@@ -8,7 +8,6 @@ import { BsFillEyeFill, BsFillEyeSlashFill } from "react-icons/bs";
 export const Registration=()=>{
     let navigate = useNavigate();
     const [message, setMessage] = React.useState("");
-    const [loading, setLoading] = React.useState(false);
     const [showPassword, setShowPassword] = React.useState(false);
     
     const initialValues = {
@@ -30,7 +29,6 @@ export const Registration=()=>{
 
     const handleSubmit = async (formValue: { username: string; password: string }) => {
         const { username, password } = formValue;
-        setLoading(true);
         const [response, error] = await register(username, password);
         if(error){
             setMessage("Něco se pokazilo zkuste to znovu později");
@@ -44,7 +42,7 @@ export const Registration=()=>{
       };
       
     return <>
-        <div className="login-wrapper">
+        <div className="form-wrapper">
       <h1>Registrace</h1>
       <div className= "text-danger"> {message}</div>
       <Formik 
@@ -67,8 +65,8 @@ export const Registration=()=>{
           </div>
           <div className="form-group">
             <label htmlFor="password">Heslo:</label>
-            <Field name="password" type={showPassword ? "text" : "password"} className="form-control" />
-            <button type="button" className="btn btn-outline-primary" onClick={()=>{showPassword ? setShowPassword(false) : setShowPassword(true)}}>
+            <Field name="password" type={showPassword ? "text" : "password"} className="form-control"/>
+            <button type="button" className="btn btn-outline-primary eye-btn" onClick={()=>{showPassword ? setShowPassword(false) : setShowPassword(true)}}>
                  { showPassword ? <BsFillEyeFill/> : <BsFillEyeSlashFill/> }</button>
             <ErrorMessage
               name="password"
