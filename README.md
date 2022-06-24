@@ -58,7 +58,7 @@ Boot application and website presentation.
 ### Mandatory requirements
 | Functionality                    | Where       | Completed (%) | Details                                                    |
 |----------------------------------|-------------|:-------------:|------------------------------------------------------------|
-| Technology/Language selection    | Analysis     |     100%      | Java/SpringBoot + JS/React + PostgreSQL                    |
+| Technology/Language selection    | [Analysis](https://docs.google.com/document/d/1iwqCdzNI0flSrte5WLlODTj-EJvJFIHnS9dFIRaR8gM/edit?usp=sharing)     |     100%      | Java/SpringBoot + JS/React + PostgreSQL                    |
 | Readme.md documentation          | here        |     100%      |                                                            |
 | Use of DB                        | Backend     |      100%     | PostgreSQL                                                 |
 | Deployment on the server         |[deployment](# Deployment) |     100%     | Heroku  deploy                                |
@@ -92,6 +92,11 @@ Admin and sample data is loaded through cz.cvut.fel.vestana.SampleDataLoader dur
 To run docker-compose from root:
   1. first build app using "mvn -Pdev clean install package" - builds jar with dependecies
   1. then run "docker-compose -f docker-compose.dev.yml up"
+At this point there is a db running on port 5432 then there is a frontend dev port 3000 with a Volume.
+And finaly a built production app on port 8080.
+
+The app itself can be run from its jar/war file in Tomcat for example.
+
 
 Can be deployed to Heroku with [Herocu CLI and git]("https://devcenter.heroku.com/articles/git").
 Steps:
