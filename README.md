@@ -32,6 +32,7 @@ Boot application and website presentation.
 | 09  | reservation controller |                                             |  Done  |   MK   |
 | 10  | interceptor            | create interceptor for logging requests     |  Done  |   AS   |
 | 11  | runner                 | app initialization                          |  Done  |   MK   |
+| 12  | loan controller        |                                          |       |  MK   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
