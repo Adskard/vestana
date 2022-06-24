@@ -27,16 +27,16 @@ Boot application and website presentation.
 |:---:|------------------------|---------------------------------------------|:------:|:------:|
 | 01  | Basic entities         | based on the UML class diagram              |  Done  |   AS   |
 | 02  | DAO                    | generate DAO                                |  Done  |   MK   |
-| 03  | reservation service    | start service, for now focus on reservation |        |   MK   |
+| 03  | reservation service    | start service, for now focus on reservation |  Done  |   MK   |
 | 04  | sign in / register     | most likely Basic authorization             |  Done  |   MK   |
-| 05  | controllers            | 2-3                                         |        |   AS   |
+| 05  | controllers            | 2-3                                         |  Done  |   AS   |
 | 06  | git tasks/use case     | create system for correct commit naming     |  Done  |   AS   |
-| 07  | loan service           |                                             |        |   MK   |
+| 07  | loan service           |                                             |  Done  |   MK   |
 | 08  | clothing service       |                                             |  Done  |   MK   |
 | 09  | reservation controller |                                             |  Done  |   MK   |
 | 10  | interceptor            | create interceptor for logging requests     |  Done  |   AS   |
 | 11  | runner                 | app initialization                          |  Done  |   MK   |
-| 12  | loan controller        |                                          |       |  MK   |
+| 12  | loan controller        |                                          | - |  MK   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
@@ -46,7 +46,7 @@ Boot application and website presentation.
 | 03  | Clothing display    | display list of available clothing          |Done    |   AŠ   |
 | 04  | Clothing article    | details of clothing article with reservation|Done    |   AŠ   |
 | 05  | Employee functions  | Reservation clothes CRUD               |90% no create|   AŠ   |
-| 06  | Reservation         | Reservations                                |40% can create|   AŠ   |
+| 06  | Reservation         | Reservations                                |60% no delete|   AŠ   |
 | 07  | Loan                 | Loans                                      |  -  |   AŠ   |
 
 
@@ -56,7 +56,7 @@ Boot application and website presentation.
 ### Mandatory requirements
 | Functionality                    | Where       | Completed (%) | Details                                                    |
 |----------------------------------|-------------|:-------------:|------------------------------------------------------------|
-| Technology/Language selection    | -           |     100%      | Java/SpringBoot + JS/React + PostgreSQL                    |
+| Technology/Language selection    | Analysis     |     100%      | Java/SpringBoot + JS/React + PostgreSQL                    |
 | Readme.md documentation          | here        |     100%      |                                                            |
 | Use of DB                        | Backend     |      100%     | PostgreSQL                                                 |
 | Deployment on the server         |[deployment](# Deployment) |     100%     | Heroku  deploy                                |
@@ -70,8 +70,8 @@ Boot application and website presentation.
 ### Non-mandatory requirements (-2 points if not present)
 | Functionality            | Where     | Completed (%) | Details                                        |
 |--------------------------|-----------|:-------------:|------------------------------------------------|
-| Cache                    | `example` |      0%       | Hazelcast                                      |
-| Messaging principle      |           |      0%       | Kafka or JVM                                   |
+| Cache                    |NOT IMPLEMENTED|      0%       | Hazelcast                                      |
+| Messaging principle      |NOT IMPLEMENTED|      0%       | Kafka or JVM                                   |
 | Security                 |JWT token  |     100%      | Basic or OAuth2                                |
 | Interceptor              | Logging   |     100%      | e.i. logging                                   |
 | Use one given technology | Controller - REST |      100%       | SOAP, REST, graphQL, Java RMI, Corba, XML-RPC  |
@@ -86,6 +86,7 @@ Boot application and website presentation.
 ### Deployment
 
 Admin and sample data is loaded through cz.cvut.fel.vestana.SampleDataLoader during Main startup.
+
 To run docker-compose from root:
   1. first build app using "mvn -Pdev clean install package" - build jar with dependecies
   1. then run "docker-compose -f docker-compose.dev.yml up"
@@ -115,10 +116,14 @@ Used patterns:
 
 backend:
   - Loans
-  - Resservation
+  - Reservation
   - Authorization
   - User
   - Clothes
   - ???
+frontend:
+  - Reservation - create and view (no delte unfortunetaly)
+  - Authorization
+  - Clothes - CRUD withou create so just RUD
 
 
