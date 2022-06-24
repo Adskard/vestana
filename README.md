@@ -2,6 +2,8 @@
 
 [FULL PROJECT ANALYSIS](https://docs.google.com/document/d/1iwqCdzNI0flSrte5WLlODTj-EJvJFIHnS9dFIRaR8gM/edit?usp=sharing) with diagrams and other goodies.
 
+or in pdf [FULL PROJECT ANALYSIS](Dokumentace.pdf)
+
 [heroku](https://nss-semestral.herokuapp.com/) - unfortunately, during last minute checks i noticed the heroku app
 fetching data from localhost and not from itself! The fix for this would be to have a separate production branche with fixed fetches
 or the app would be split into two heroku apps for frontend and backend.
@@ -127,8 +129,8 @@ backend:
   - User
   - Clothes
 frontend:
-  - Reservation - create and view (no delte unfortunetaly)
+  - Reservation - create and view (no delete unfortunately)
   - Authorization
-  - Clothes - CRUD withou create so just RUD
+  - Clothes - CRUD without create so just RUD
 
 
