@@ -1,5 +1,21 @@
 $primary-color: white;
 
-body {
-
+img{
+    margin-right: 1rem;
+}
+button{
+    left:0;
+    margin-top: 1rem;
+}
+@media screen and (max-width:700px) {
+    img{
+        display: block;
+    }
+    div.flex-parent{
+        display: block;
+        div.flex-chidlren{
+            flex: none;
+        }
+    }
+    
 }

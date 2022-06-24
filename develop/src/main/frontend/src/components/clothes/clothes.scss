@@ -1,5 +1,9 @@
 $primary-color: white;
 
-body {
-
+div.card{
+    max-width: 24rem;
+    max-height: fit-content;
+}
+div.col{
+    margin-top: 1rem;
 }

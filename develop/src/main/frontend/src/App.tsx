@@ -31,7 +31,7 @@ const App = ()=>{
                     <Route path="About" element={<About/>}/>
                     <Route path="Clothes">
                         <Route index element = {<Clothes />}/>
-                        <Route path=":ArticleId" element={<Article />} />
+                        <Route path=":ArticleId" element={<Article authenticated={authenticated} />} />
                     </Route>
                     <Route path="Contacts" element={<Contacts />}/>
                     <Route path="Signin" element={<Signin setAuthenticated={setAuthenticated}/>} />

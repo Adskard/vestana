@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {Container, Card, Button, CardGroup} from 'react-bootstrap';
+import {Row, Card, Button, CardGroup, Col} from 'react-bootstrap';
 import "./clothes.scss";
 
 
@@ -32,20 +32,29 @@ export const Clothes =({}) =>{
     }  
     fetchClothes();
   }, [])
-    return (<>
+    return (<article>
       <h1 className="font-weight-light">Clothes</h1>
       <CardGroup>
-      {clothes.map((item : clothingArticle)=>{
-          return <Card border="primary" style={{ maxWidth: '22rem'}} key={item.id}>
-              <Card.Img variant="top" src="holder.js/100px180" />
-              <Card.Body>
-                <Card.Title>{item.name}</Card.Title>
-                <Button variant="primary" onClick={()=>navigate(item.id.toString())}>Go somewhere</Button>
-              </Card.Body>
-            </Card>;
-        })}
+        <Row className="container" xs={1} md={2} lg={3} xl={4}  >
+        {clothes
+        .map((item : clothingArticle)=>{
+            return (<Col key={item.id}>
+              <Card border="primary" >
+                <Card.Img variant="top" src="https://via.placeholder.com/150" alt="dress-image"/>
+                <Card.Body>
+                  <Card.Title>{item.name}</Card.Title>
+                  <Card.Text>
+                    {item.description}
+                  </Card.Text>
+                  <Button variant="primary" onClick={()=>navigate(item.id.toString())}>Bližší informace</Button>
+                </Card.Body>
+              </Card>
+              </Col>);
+          })}
+        </Row>
+
       </CardGroup>
-      </>);
+      </article>);
 };
 
 export default Clothes;

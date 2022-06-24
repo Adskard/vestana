@@ -41,7 +41,7 @@ public class ClothingController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClothingArticleDto> getClothing(@PathVariable Long id) {
         ClothingArticle item;
-        try {
+        try {   
             item = clothingService.getById(id);
         } catch (Exception e) {
             log.warn(e.getMessage());

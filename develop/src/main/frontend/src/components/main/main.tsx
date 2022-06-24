@@ -8,7 +8,7 @@ export const Main =({}) =>{
     <main className = "background" style={{ backgroundImage: "url(/" + image +")",
       backgroundRepeat: "no-repeat",
       backgroundSize: 'cover',}}>
-      <div className="container">
+      <div className="container scroll">
           <Outlet />
       </div>
     </main>
