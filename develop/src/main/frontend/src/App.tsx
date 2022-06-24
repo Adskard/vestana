@@ -11,12 +11,16 @@ import Signin from "./components/signin";
 import Register from "./components/registration";
 import Footer from "./components/footer/footer";
 import Loans from "./components/loans/loans";
+import Reservations from "./components/reservations/reservations";
 import { getCurrentUser } from "./service/authService";
 
 const App = ()=>{
     const [authenticated, setAuthenticated] = React.useState(getCurrentUser());
 
-    const protectedRoutes = <Route path="Loans"  element ={<Loans/>}/>;
+    const protectedRoutes = <>
+    <Route path="Loans"  element ={<Loans/>}/>
+    <Route path="Reservations"  element ={<Reservations/>}/>
+    </>;
 
     React.useEffect(()=>{
         setAuthenticated(getCurrentUser())

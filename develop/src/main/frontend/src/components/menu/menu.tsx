@@ -24,9 +24,10 @@ export const Menu =({authenticated, setAuthenticated} : MenuProps) =>{
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/About">O nás</Nav.Link>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Clothes">Oděvy</Nav.Link>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Contacts">Kontatky</Nav.Link>
-            {authenticated ? 
+            {authenticated ? <>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Loans">Výpůjčky</Nav.Link>
-            : <></>}
+            <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Reservations">Rezervace</Nav.Link>
+            </>: <></>}
           </Nav>
           {authenticated ? <div className ="flex-parent right">
             <Container className ="flex-child"><p>{authenticated}</p></Container>

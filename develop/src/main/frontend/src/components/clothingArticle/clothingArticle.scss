@@ -7,7 +7,7 @@ button{
     left:0;
     margin-top: 1rem;
 }
-@media screen and (max-width:700px) {
+@media screen and (max-width:800px) {
     img{
         display: block;
     }
@@ -15,6 +15,7 @@ button{
         display: block;
         div.flex-chidlren{
             flex: none;
+            display: block;
         }
     }
     

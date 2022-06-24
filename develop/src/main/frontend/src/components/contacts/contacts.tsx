@@ -1,10 +1,10 @@
 import * as React from "react";
-import {Form as FormBoot} from "react-bootstrap";
 import * as Yup from "yup";
-import { Formik, ErrorMessage, Form, Field } from "formik";
+import { Formik, ErrorMessage, Form, Field} from "formik";
+import { useNavigate } from "react-router-dom";
 
 export const Contacts =({}) =>{
-
+      let navigate = useNavigate();
       
       const today = new Date();
 
@@ -44,6 +44,10 @@ export const Contacts =({}) =>{
                          })
                     });
                   console.log(submit);
+                  if(submit.ok){
+                        navigate("/")
+                        alert("Rezervace proběhla úspěšně!");
+                  }
             }
             catch(er){
                   console.error(er);

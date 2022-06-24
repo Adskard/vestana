@@ -9,6 +9,7 @@ interface clothingArticle{
   name : string,
   description : string,
   size : number,
+  deleted: boolean,
   price : number
 }
 
@@ -36,7 +37,7 @@ export const Clothes =({}) =>{
       <h1 className="font-weight-light">Clothes</h1>
       <CardGroup>
         <Row className="container" xs={1} md={2} lg={3} xl={4}  >
-        {clothes
+        {clothes.filter((item:clothingArticle)=>{return !item.deleted})
         .map((item : clothingArticle)=>{
             return (<Col key={item.id}>
               <Card border="primary" >
