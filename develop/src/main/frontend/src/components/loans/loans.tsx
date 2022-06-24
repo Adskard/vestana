@@ -3,8 +3,10 @@ import { Accordion, Card } from "react-bootstrap";
 
 export const Loans = () =>{
     const [loans, setLoans] = React.useState([]);
+    
 
-    return (
+    return (<>
+        <h1>Půjčky - nestihlo se!</h1>
         <Accordion  flush>
             <Accordion.Item eventKey="0">
                 <Accordion.Header>Accordion Item #1 </Accordion.Header>
@@ -33,7 +35,7 @@ export const Loans = () =>{
                 </Accordion.Body>
             </Accordion.Item>
             </Accordion>
-    );
+            </>);
 }
 
 export default Loans;
