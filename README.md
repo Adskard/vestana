@@ -2,7 +2,8 @@
 
 [FULL PROJECT ANALYSIS](https://docs.google.com/document/d/1iwqCdzNI0flSrte5WLlODTj-EJvJFIHnS9dFIRaR8gM/edit?usp=sharing) with diagrams and other goodies.
 
-
+[heroku](https://nss-semestral.herokuapp.com/) - unfortunately, during last minute checks i noticed the heroku app
+fetching data from localhost and not from itself!
 
 Team members:
 - Michal Kalista (kalismic)
