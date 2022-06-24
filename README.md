@@ -3,7 +3,8 @@
 [FULL PROJECT ANALYSIS](https://docs.google.com/document/d/1iwqCdzNI0flSrte5WLlODTj-EJvJFIHnS9dFIRaR8gM/edit?usp=sharing) with diagrams and other goodies.
 
 [heroku](https://nss-semestral.herokuapp.com/) - unfortunately, during last minute checks i noticed the heroku app
-fetching data from localhost and not from itself!
+fetching data from localhost and not from itself! The fix for this would be to have a separate production branche with fixed fetches
+or the app would be split into two heroku apps for frontend and backend.
 
 Team members:
 - Michal Kalista (kalismic)
@@ -89,7 +90,7 @@ Boot application and website presentation.
 Admin and sample data is loaded through cz.cvut.fel.vestana.SampleDataLoader during Main startup.
 
 To run docker-compose from root:
-  1. first build app using "mvn -Pdev clean install package" - build jar with dependecies
+  1. first build app using "mvn -Pdev clean install package" - builds jar with dependecies
   1. then run "docker-compose -f docker-compose.dev.yml up"
 
 Can be deployed to Heroku with [Herocu CLI and git]("https://devcenter.heroku.com/articles/git").
@@ -111,7 +112,6 @@ Used patterns:
   - Chain of responsibility - Controller -> service -> DAO
   - Builder - cz.cvut.fel.vestana.SampleDataLoader
   - Interceptor - cz.cvut.fel.vestana.log
-  - ???
 
 ### Use-case
 
@@ -121,7 +121,6 @@ backend:
   - Authorization
   - User
   - Clothes
-  - ???
 frontend:
   - Reservation - create and view (no delte unfortunetaly)
   - Authorization
