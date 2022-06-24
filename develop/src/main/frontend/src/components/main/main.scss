@@ -1,26 +1,4 @@
 @import "../../styles/_variables";
-<<<<<<< HEAD
-@import "~bootstrap/scss/bootstrap";
-
-body {
-    margin: 0;
-    padding: 0;
-    main{
-        height:100vh;
-        padding: 2rem 5rem;
-        div.container{
-            background-color: $tertiary-color;
-            padding: 2rem 5rem;
-            min-width: 80vh;
-            height: 100%;
-            opacity: 92%;
-            overflow-y: scroll;
-            p{
-                overflow: hidden;
-            }
-        }
-    }
-=======
 
 main{
     height:100vh;
@@ -56,5 +34,4 @@ main{
             margin-top: 1rem;
         }
     }
->>>>>>> frontend
 }
