@@ -1,5 +1,9 @@
 # nss-projekt
 
+[FULL PROJECT ANALYSIS](https://docs.google.com/document/d/1iwqCdzNI0flSrte5WLlODTj-EJvJFIHnS9dFIRaR8gM/edit?usp=sharing) with diagrams and other goodies.
+
+
+
 Team members:
 - Michal Kalista (kalismic)
 - Anna Skalická (skalian1)
@@ -32,15 +36,18 @@ Boot application and website presentation.
 | 09  | reservation controller |                                             |  Done  |   MK   |
 | 10  | interceptor            | create interceptor for logging requests     |  Done  |   AS   |
 | 11  | runner                 | app initialization                          |  Done  |   MK   |
+| 12  | loan controller        |                                          |       |  MK   |
 
 ## TODO Frontend
 | N°  | Task                | Details                                     | Status | Author |
 |:---:|---------------------|---------------------------------------------|:------:|:------:|
 | 01  | Overall look        | overall style and structure of pages        |Done    |   AŠ   |
 | 02  | Auth                | connected auth with basic checks            |Done    |   AŠ   |
-| 03  | Clothing display    | display list of available clothing          |        |   AŠ   |
-| 04  | Clothing article    | details of clothing article with reservation|        |   AŠ   |
-| 05  | Employee functions  | Reservation overview clothes CRUD           |        |   AŠ   |
+| 03  | Clothing display    | display list of available clothing          |Done    |   AŠ   |
+| 04  | Clothing article    | details of clothing article with reservation|Done    |   AŠ   |
+| 05  | Employee functions  | Reservation clothes CRUD               |90% no create|   AŠ   |
+| 06  | Reservation         | Reservations                                |40% can create|   AŠ   |
+| 07  | Loan                 | Loans                                      |  -  |   AŠ   |
 
 
 ## Requirements
@@ -55,8 +62,8 @@ Boot application and website presentation.
 | Deployment on the server         |[deployment](# Deployment) |     100%     | Heroku  deploy                                |
 | SW architecture design selection | here        |     100%   | Monolith + 3 Tier (frontend, backend, db)                     |
 | Initialization instructions      |[deployment](# Deployment)  |50%  | how to deploy, where to find basic data, such as admin psw |
-| Use 5 design patterns            |             |               | Must make sense.                                           |
-| Two UC per team member           |             |               | non-trivial, 3 members => 6 UC                             |
+| Use 5 design patterns            | [patterns](# Patterns)  |   99%  | Must make sense.                                           |
+| Two UC per team member           | [use-case](#Use-case)  |   80%    | non-trivial, 3 members => 6 UC                             |
 
 
 
@@ -78,6 +85,11 @@ Boot application and website presentation.
 
 ### Deployment
 
+Admin and sample data is loaded through cz.cvut.fel.vestana.SampleDataLoader during Main startup.
+To run docker-compose from root:
+  1. first build app using "mvn -Pdev clean install package" - build jar with dependecies
+  1. then run "docker-compose -f docker-compose.dev.yml up"
+
 Can be deployed to Heroku with [Herocu CLI and git]("https://devcenter.heroku.com/articles/git").
 Steps:
   1. login to heroku "heroku login"
@@ -89,4 +101,24 @@ Steps:
 References:
  - [Spring boot and heroku](https://devcenter.heroku.com/articles/deploying-spring-boot-apps-to-heroku)
  - [Heroku maven plugin](https://devcenter.heroku.com/articles/deploying-java-applications-with-the-heroku-maven-plugin)
+
+### Patterns
+
+Used patterns:
+  - Data access object DAO - cz.cvut.fel.vestana.repo/
+  - Chain of responsibility - Controller -> service -> DAO
+  - Builder - cz.cvut.fel.vestana.SampleDataLoader
+  - Interceptor - cz.cvut.fel.vestana.log
+  - ???
+
+### Use-case
+
+backend:
+  - Loans
+  - Resservation
+  - Authorization
+  - User
+  - Clothes
+  - ???
+
 

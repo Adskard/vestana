@@ -3,7 +3,7 @@ package cz.cvut.fel.nss.vestana.model.enums;
 public enum ArticleState {
 
     BOOKED("BOOKED"),
-    AVAILABLE("AVAILABLE"),
+    LOANED("LOANED"),
     IN_CLEANING("IN_CLEANING");
 
     private final String name;

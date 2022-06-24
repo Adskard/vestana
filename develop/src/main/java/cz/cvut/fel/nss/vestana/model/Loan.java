@@ -5,6 +5,7 @@ import cz.cvut.fel.nss.vestana.model.enums.DeliveryType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -30,12 +31,28 @@ public class Loan extends AbstractEntity {
     @Enumerated(EnumType.STRING)
     private DeliveryType deliveryType;
 
+    @OneToOne
+    @Setter
+    @Getter
+    private TimeEvent event;
+
     @ManyToOne
     private Customer customerToLoan;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @Getter
     private List<ClothingArticle> loanedItems;
+
+    public Loan(LocalDate startDate, LocalDate endDate, DeliveryType deliveryType, Customer customerToLoan, List<ClothingArticle> loanedItems) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.deliveryType = deliveryType;
+        this.customerToLoan = customerToLoan;
+        this.loanedItems = loanedItems;
+    }
+
+    public Loan() {
+    }
 
     public LoanDto toDto() {
         List<LoanDto.ItemDto> items = loanedItems.stream()
@@ -52,8 +69,8 @@ public class Loan extends AbstractEntity {
         LoanDto result = new LoanDto();
         result.setId(getId());
         result.setDeleted(isDeleted());
-        result.setStart(startDate);
-        result.setEnd(endDate);
+        result.setStartDate(startDate);
+        result.setEndDate(endDate);
         result.setDeliveryType(deliveryType);
         result.setCustomer(customerToLoan.toDto());
         result.setLoanedItems(items);
