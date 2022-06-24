@@ -16,9 +16,9 @@ public class LoanDto {
     private Long id;
     private boolean deleted;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate start;
+    private LocalDate startDate;
     @JsonFormat(pattern="yyyy-MM-dd")
-    private LocalDate end;
+    private LocalDate endDate;
     private DeliveryType deliveryType;
     private CustomerDto customer;
     private List<ItemDto> loanedItems;
