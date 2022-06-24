@@ -1,6 +1,7 @@
 import * as React from "react";
-import Form from "react-bootstrap/Form";
-import { FormikConsumer, withFormik } from "formik";
+import {Form as FormBoot} from "react-bootstrap";
+import * as Yup from "yup";
+import { Formik, ErrorMessage, Form, Field } from "formik";
 
 export const Contacts =({}) =>{
 
@@ -8,12 +9,64 @@ export const Contacts =({}) =>{
       const today = new Date();
 
       const initVal = {
-
+            email:"",
+            date:"",
+            tel:"",
+            name:""
       }
 
-      const handleSubmit = async () =>{
-
+      type reservation = {
+            email: string,
+            date: string,
+            tel: string,
+            name: string
       }
+
+      const handleSubmit = async (formData : reservation) =>{
+            const uri = "http://localhost:8080/reservation/";
+            try{
+                  const submit = await fetch(uri + "new", {
+                        method: "POST",
+                        headers: {
+                            'Content-Type': 'application/json'
+                            },
+                        body: JSON.stringify({
+                            customer: {
+                                    name: formData.name,
+                                    email: formData.email,
+                                    phone: formData.tel,
+                              // in future optional
+                                    "deliveryAddress": "mockAdresa",
+                            },
+                            startTime: formData.date,
+                            "endTime": formData.date,
+                            "bookedItems": []
+                         })
+                    });
+                  console.log(submit);
+            }
+            catch(er){
+                  console.error(er);
+            }
+      }
+
+      const validationSchema = ()=> {
+            return Yup.object().shape({
+                email: Yup.string()
+                .required("Povinné pole")
+                .matches(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, "Nevalidní email"),
+                tel: Yup.string()
+                .required("Povinné pole")
+                .matches(/^[0-9]*$/, "Telefoní čísla obsahují jen číslice")
+                .test('len', 'Délka číslo musí mít 9 číslic',  val  =>  val.length === 9),
+                name: Yup.string()
+                .required("Povinné pole")
+                .min(3, "Jméno musí obsahovat alespoň 3 znaky"),
+                date: Yup.date()
+                .required("Povinné pole")
+                .min(today, "Datum musí být v budouctnosti!")
+            });
+            }
 
 
 
@@ -39,29 +92,55 @@ export const Contacts =({}) =>{
       <h2>Rezervujte se!</h2>
       <p>Zde si můžete rezervovat čas na prodejně k vyzkoušení oděvů.</p>
       <div className = "form-wrapper">
-            <Form onSubmit={handleSubmit}>
-                  <Form.Group className="form-group">
-                        <label>Datum rezervace:</label>
-                        <Form.Control type="date" name='dateOfReservation'/>
-                  </Form.Group>
-                  <Form.Group className="form-group">
-                        <label>E-mail:</label>
-                        <Form.Control type="email" placeholder="email@email.cz" />
-                  </Form.Group>
-                  <Form.Group className="form-group">
-                        <label>Jméno:</label>
-                        <Form.Control type="username" placeholder="Petr Omáčka" />
-                  </Form.Group>
-                  <Form.Group className="form-group">
-                        <label>Telefon:</label>
-                        <Form.Control type="username" placeholder="" />
-                  </Form.Group>
-                  <Form.Group className="form-group">
-                  <button type="submit" className="btn btn-primary btn-block">
-                        <span>Rezervovat</span>
-                  </button>
-                  </Form.Group>
-            </Form>
+            <Formik
+            validateOnMount
+            initialValues={initVal}
+            onSubmit = {handleSubmit}
+            validationSchema = {validationSchema}>
+                  <Form>
+                        <div className="form-group">
+                              <label>Datum rezervace:</label>
+                              <Field name="date" type="datetime-local" className="form-control" />
+                        </div>
+                        <ErrorMessage
+                        name="date"
+                        component="div"
+                        className="text-danger"
+                        />
+                        <div className="form-group">
+                              <label>E-mail:</label>
+                              <Field name="email" type="email" placeholder="email@email.cz" className="form-control" />
+                        </div>
+                        <ErrorMessage
+                        name="email"
+                        component="div"
+                        className="text-danger"
+                        />
+                        <div className="form-group">
+                              <label>Příjmení:</label>
+                              <Field name="name" type="string" placeholder="Petr Omáčka" className="form-control" />
+                        </div>
+                        <ErrorMessage
+                        name="name"
+                        component="div"
+                        className="text-danger"
+                        />
+                        <div className="form-group">
+                              <label>Telefon:</label>
+                              <Field name="tel" type="tel" placeholder="400 000 000" className="form-control"/>
+                        </div>
+                        <ErrorMessage
+                        name="tel"
+                        component="div"
+                        className="text-danger"
+                        />
+                        <div className="form-group">
+                        <button type="submit" className="btn btn-primary btn-block">
+                              <span>Rezervovat</span>
+                        </button>
+                        </div>
+                  </Form>
+            </Formik>
       </div>
       </article>);
 };

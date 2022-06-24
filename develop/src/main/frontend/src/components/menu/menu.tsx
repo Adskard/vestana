@@ -25,9 +25,9 @@ export const Menu =({authenticated, setAuthenticated} : MenuProps) =>{
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Clothes">Oděvy</Nav.Link>
             <Nav.Link as={NavLink} onClick={() => setExpanded(false)} to="/Contacts">Kontatky</Nav.Link>
           </Nav>
-          {authenticated ? <div className ="">
-            <Container><p>{authenticated}</p></Container>
-            <Container><button onClick={()=>{
+          {authenticated ? <div className ="flex-parent right">
+            <Container className ="flex-child"><p>{authenticated}</p></Container>
+            <Container className ="flex-child"><button className ="btn btn-primary btn-block" onClick={()=>{
               setAuthenticated("");
               logout();
             }}>Odhlásit se</button></Container>
